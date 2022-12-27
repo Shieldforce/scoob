@@ -1,12 +1,33 @@
 #!/bin/bash
 
+# Variables ------------------------------------------------------------------------------------------------------------
 path_dir="${0%/*}"
 
-if [[ -z $1 ]]; then
+# Global variables -----------------------------------------------------------------------------------------------------
+declare -x path_dir
+
+# ----------------------------------------------------------------------------------------------------------------------
+
+if [ $# -lt 1 ]; then
+  echo "";
+  # Chama o icon se não for passado argumentos!
   bash $path_dir/progs/icon.sh
+  # Chama o help se não for passado argumentos!
+  bash $path_dir/progs/help.sh
+  echo "";
 fi
 
-if [[ -z $1 ]] || [[ "$1" == *help* ]]; then
-  bash $path_dir/progs/help.sh
-fi
+COUNT=0
+for ARG in "$@"; do
+   COUNT=`expr $COUNT + 1`
+
+   # Chama o help se passado o argumento --help!
+   if [[ "$ARG" == *help* ]]; then
+     echo "";
+     bash $path_dir/progs/help.sh
+     echo "";
+   fi
+done
+
+
 
