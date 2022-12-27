@@ -30,7 +30,6 @@ scoob --type docker-php-nginx
 - --type           : Tipo do container para php sempre será (docker-php-nginx)
 - --version        : Versão do PHP Versões disponíveis (7.4, 8.1, 8.2)
 - --port           : Porta de Exposição do container
-- --app-build      : Pasta que o container irá implementar
 ```
-scoob --type docker-php-nginx --version 7.4 --port 8081 --app-build .
+scoob --type docker-php-nginx --version 7.4 --port 8081
 ```

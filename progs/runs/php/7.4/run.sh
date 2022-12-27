@@ -8,13 +8,8 @@ else
   port=$6
 fi
 
-if [ -v $7 ] && [ -v $8 ] && [[ "$7" = "--app-build" ]]; then
-  app_build=.
-else
-  app_build=$8
-fi
-
 # -----------------------------------------------------------
+
 dir=scoob_implements/php/${4}
 
 if [ -d $dir ]; then
@@ -42,42 +37,42 @@ else
   fi
 fi
 
-cp -R ${path_dir}/progs/runs/php/${4}/* $dir
+cp -R ${path_dir}/progs/runs/php/${4}/nginx $dir
+cp -R ${path_dir}/progs/runs/php/${4}/php $dir
+cp -R ${path_dir}/progs/runs/php/${4}/supervisord $dir
+cp ${path_dir}/progs/runs/php/${4}/Dockerfile $dir
+
 chmod 777 $dir
 
 # -----------------------------------------------------------
 
 echo "";
-read -p "É opcional, mas se preferir configurar os arquivos dos serviços,
-eles estão na pasta que acabou de ser criada na raiz do --app-build que você passou,
-se não passou nenhum --app-build, os arquivos foram criados na raiz na pasta corrente
-do terminal que você executou o scoob: (${dir}), para subir o container baseado nas
-suas configurações tecle S só depois de configurar os arquivos dos serviços,
-tecle S para continuar: [S / N]: " continue
+bash ${path_dir}/progs/question.sh "
+  É opcional, mas se preferir configurar os arquivos dos serviços,
+  eles estão na pasta que acabou de ser criada na raiz do seu projeto : ($(pwd)/${dir}),
+  para subir o container baseado nas suas configurações tecle S só depois de
+  configurar os arquivos dos serviços!"
+read -p "tecle S para continuar: [S / N]: " continue
 
 if [[ "$continue" = "s" ]] || [[ "$continue" = "s" ]]; then
-
   docker build \
               -t ${container} \
               --build-arg EXPOSE_PORT=${port} \
               --build-arg PATH_DIR=${dir} \
-              -f "${dir}/Dockerfile" $app_build
-
+              -f "${dir}/Dockerfile" .
   docker run \
               -d \
               --name ${container} \
               -p "${port}:80" \
               ${container}
-
   if docker ps | grep "$container" &> /dev/null; then
     echo "";
     echo -e "\e[33;32m Container criado com sucesso! \e[0m";
     echo "";
     echo -e "\e[33;36m $(docker ps | grep ${container}) \e[0m";
   else
-    bash error.sh
+    bash ${path_dir}/progs/error.sh 'Erro ao criar container!'
   fi
-
 else
   echo "Você decidiu não continuar...!";
   exit;

@@ -55,6 +55,8 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 EXPOSE ${EXPOSE_PORT}
 
+# ENTRYPOINT bash /var/www/scoob_implements/php/7.4/run_entrypoint.sh ${EXPOSE_PORT}
+
 # finish dockerfile
 ADD ${PATH_DIR}/supervisord/supervisord.conf /etc/supervisor/supervisord.conf
 ADD ${PATH_DIR}/supervisord/conf /etc/supervisord.d/

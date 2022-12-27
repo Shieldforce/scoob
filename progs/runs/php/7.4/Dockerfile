@@ -6,51 +6,41 @@ ARG PATH_DIR
 ARG APP_DIR=/var/www
 ### Args ------------------------
 
-# Workdir --------------------------------------------------
+# Layer Workdir --------------------------------------------------
 WORKDIR $APP_DIR
 
-# Copy . to /var/www/
+# Layer Copy . to /var/www/
 COPY . $APP_DIR
 
-# Permissions dir
-RUN chmod 755 -R *
-RUN chown -R www-data: *
+# Layer add Permissions dir
+RUN chmod 755 -R * && chown -R www-data: *
 
-# First update packegist
-RUN apt-get update
-RUN apt-get install -y --no-install-recommends \
-    apt-utils
-
-# Install supervisor
-RUN apt-get install -y --no-install-recommends supervisor
-COPY ${PATH_DIR}/supervisord/supervisord.conf /etc/supervisor
-COPY ${PATH_DIR}/supervisord/conf /etc/supervisord.d/
-
-# packs
-RUN apt-get update && apt-get install -y \
+# Layers install dependencies
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    apt-utils \
+    supervisor \
     zlib1g-dev \
     libzip-dev \
     unzip \
     libpng-dev \
     libpq-dev \
-    libxml2-dev
+    libxml2-dev \
+    nginx
 
-# Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Install plus extensions php
 RUN docker-php-ext-install zip iconv simplexml pcntl gd fileinfo \
     mysqli pdo pdo_mysql pdo_pgsql pgsql session xml
 
-#COPY php.ini-production /usr/local/etc/php/php.ini
+# Layers Copy folders and file to local
+COPY ${PATH_DIR}/supervisord/supervisord.conf /etc/supervisor
+COPY ${PATH_DIR}/supervisord/conf /etc/supervisord.d/
 COPY ${PATH_DIR}/php/php.ini /usr/local/etc/php/php.ini
-
-# Install nginx
-RUN apt-get install nginx -y
 COPY ${PATH_DIR}/nginx/nginx.conf /etc/nginx/nginx.conf
 COPY ${PATH_DIR}/nginx/sites /etc/nginx/sites-available
 
-# Clear repositories
+# Layer Clear
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 EXPOSE ${EXPOSE_PORT}
