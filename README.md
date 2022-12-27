@@ -32,9 +32,13 @@ scoob --docker-prune
 ```
 
 ### Exemplos de container para php/nginx:
-- --type           : Tipo do container para php sempre será (docker-php-nginx)
-- --version        : Versão do PHP Versões disponíveis (7.4, 8.1, 8.2)
-- --port           : Porta de Exposição do container
+- --type                : Tipo do container para php sempre será (docker-php-nginx)
+- --version             : Versão do PHP Versões disponíveis (7.4, 8.1, 8.2)
+- --port                : Porta de Exposição do container
+- --composer-update     : Atualiza a lista de pacotes da vendor!
+- --migrate-seed        : Roda as migrations se for um laravel! 
+- --migrate             : Roda as migrations e seeds!
+### Este comando vai instalar um container com php/nginx, atualizar a vendor e rodar as migrations e seeds (Caso muito útil e, laravel)
 ```
-scoob --type docker-php-nginx --version 7.4 --port 8081
+scoob --type docker-php-nginx --version 7.4 --port 8081 --composer-update --migrate-seed
 ```

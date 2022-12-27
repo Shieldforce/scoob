@@ -76,7 +76,7 @@ if [[ "$continue" = "s" ]] || [[ "$continue" = "s" ]]; then
     echo -e "\e[33;36m $(docker ps | grep ${container}) \e[0m";
     echo "";
     bash ${path_dir}/progs/success.sh 'Rodando comandos da implementação!'
-    bash ${dir}/commands.sh ${container}
+    bash ${dir}/commands.sh ${container} "$@"
   else
     bash ${path_dir}/progs/error.sh 'Erro ao criar container!'
   fi
