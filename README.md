@@ -19,6 +19,9 @@ scoob --help
 ### Os tipos de implementação são:
 ```
 scoob --type docker-php
-scoob --type docker-laravel
-scoob --type docker-node
+```
+
+### Exemplos:
+```
+scoob --type docker-php --version 7.4 --port 9001
 ```

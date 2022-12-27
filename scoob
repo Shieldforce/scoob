@@ -34,6 +34,13 @@ for ARG in "$@"; do
     bash $path_dir/progs/type.sh "$@"
     echo "";
   fi
+
+  # Chama a execução do tipo se passado o argumento --type!
+  if [[ "$ARG" == *--docker-remove* ]]; then
+    echo "";
+    bash $path_dir/progs/docker-remove.sh "$@"
+    echo "";
+  fi
 done
 
 

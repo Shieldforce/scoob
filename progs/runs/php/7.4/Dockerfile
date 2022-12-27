@@ -1,0 +1,58 @@
+FROM php:7.4-fpm
+
+### Args ------------------------
+ARG EXPOSE_PORT
+ARG PATH_DIR
+ARG APP_DIR=/var/www
+### Args ------------------------
+
+# Workdir --------------------------------------------------
+WORKDIR $APP_DIR
+
+# Permissions dir
+RUN chmod 755 -R *
+RUN chown -R www-data: *
+
+# First update packegist
+RUN apt-get update
+RUN apt-get install -y --no-install-recommends \
+    apt-utils
+
+# Install supervisor
+RUN apt-get install -y --no-install-recommends supervisor
+COPY ${PATH_DIR}/progs/runs/php/7.4/supervisord/supervisord.conf /etc/supervisor
+COPY ${PATH_DIR}/progs/runs/php/7.4/supervisord/conf /etc/supervisord.d/
+
+# packs
+RUN apt-get update && apt-get install -y \
+    zlib1g-dev \
+    libzip-dev \
+    unzip \
+    libpng-dev \
+    libpq-dev \
+    libxml2-dev
+
+# Composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# Install plus extensions php
+RUN docker-php-ext-install zip iconv simplexml pcntl gd fileinfo \
+    mysqli pdo pdo_mysql pdo_pgsql pgsql session xml
+
+#COPY php.ini-production /usr/local/etc/php/php.ini
+COPY ${PATH_DIR}/progs/runs/php/7.4/php/php.ini /usr/local/etc/php/php.ini
+
+# Install nginx
+RUN apt-get install nginx -y
+COPY ${PATH_DIR}/progs/runs/php/7.4/nginx/nginx.conf /etc/nginx/nginx.conf
+COPY ${PATH_DIR}/progs/runs/php/7.4/nginx/sites /etc/nginx/sites-available
+
+# Clear repositories
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+
+EXPOSE ${EXPOSE_PORT}
+
+# finish dockerfile
+ADD ${PATH_DIR}/progs/runs/php/7.4/supervisord/supervisord.conf /etc/supervisor/supervisord.conf
+ADD ${PATH_DIR}/progs/runs/php/7.4/supervisord/conf /etc/supervisord.d/
+CMD /usr/bin/supervisord -n
