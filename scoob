@@ -1,0 +1,12 @@
+#!/bin/bash
+
+path_dir="${0%/*}"
+
+if [[ -z $1 ]]; then
+  bash $path_dir/progs/icon.sh
+fi
+
+if [[ -z $1 ]] || [[ "$1" == *help* ]]; then
+  bash $path_dir/progs/help.sh
+fi
+
