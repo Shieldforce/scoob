@@ -3,14 +3,12 @@ FROM php:7.4-fpm
 ### Args ------------------------
 ARG EXPOSE_PORT
 ARG PATH_DIR
+ARG PATH_COR
 ARG APP_DIR=/var/www
 ### Args ------------------------
 
 # Layer Workdir --------------------------------------------------
 WORKDIR $APP_DIR
-
-# Layer Copy . to /var/www/
-COPY . $APP_DIR
 
 # Layer add Permissions dir
 RUN chmod 755 -R * && chown -R www-data: *

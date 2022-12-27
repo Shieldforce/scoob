@@ -26,6 +26,11 @@ scoob --type docker-remove {nome do container}
 scoob --type docker-php-nginx
 ```
 
+### Limpar tudo que não está sendo usado no docker (CUIDADO, IRÁ EXCLUIR TUDO QUE NÃO ESTÁ SENDO USADO!):
+```
+scoob --docker-prune
+```
+
 ### Exemplos de container para php/nginx:
 - --type           : Tipo do container para php sempre será (docker-php-nginx)
 - --version        : Versão do PHP Versões disponíveis (7.4, 8.1, 8.2)

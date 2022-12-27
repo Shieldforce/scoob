@@ -41,6 +41,13 @@ for ARG in "$@"; do
     bash $path_dir/progs/docker-remove.sh "$@"
     echo "";
   fi
+
+  # Chama a deleção de container e image se passado o argumento --docker-remove!
+    if [[ "$ARG" == *--docker-prune* ]]; then
+      echo "";
+      bash $path_dir/progs/docker-prune.sh "$@"
+      echo "";
+    fi
 done
 
 
