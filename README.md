@@ -37,6 +37,7 @@ scoob --docker-prune
 - --port                : Porta de Exposição do container
 - --composer-update     : Atualiza a lista de pacotes da vendor!
 - --migrate-seed        : Roda as migrations se for um laravel! 
+- --migrate-fresh       : Reseta as migrations se for um laravel! 
 - --migrate             : Roda as migrations e seeds!
 ### Este comando vai instalar um container com php/nginx, atualizar a vendor e rodar as migrations e seeds (Caso muito útil e, laravel)
 ```

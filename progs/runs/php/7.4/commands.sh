@@ -1,8 +1,28 @@
 #!/bin/bash
 
 container=$1
-composer=$9
-migrate=$9
+migrate=""
+container=""
+
+if [[ "$*" == *--migrate-seed* ]]; then
+  migrate="--migrate-seed";
+fi
+
+if [[ "$*" == *--migrate* ]]; then
+  migrate="--migrate";
+fi
+
+if [[ "$*" == *--migrate-fresh* ]]; then
+  migrate="--migrate-fresh";
+fi
+
+if [[ "$*" == *--migrate-fresh* ]]; then
+  migrate="--migrate-fresh";
+fi
+
+if [[ "$*" == *--composer-update* ]]; then
+  composer="--composer-update";
+fi
 
 docker exec -it $container useradd -m $(whoami) &> /dev/null
 
@@ -23,6 +43,9 @@ if docker exec -it $container cat artisan &> /dev/null; then
   if docker exec -it $container cat .env &> /dev/null; then
     if [[ $migrate = "--migrate-seed" ]]; then
       docker exec -it $container su -c "php artisan migrate --seed" -s /bin/sh $(whoami)
+    fi
+    if [[ $migrate = "--migrate-fresh" ]]; then
+      docker exec -it $container su -c "php artisan migrate:fresh --seed" -s /bin/sh $(whoami)
     fi
     if [[ $migrate = "--migrate" ]]; then
       docker exec -it $container su -c "php artisan migrate" -s /bin/sh $(whoami)
