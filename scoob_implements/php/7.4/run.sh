@@ -49,9 +49,7 @@ chmod 777 $dir
 
 echo "";
 read -p "É opcional, mas se preferir configurar os arquivos dos serviços,
-eles estão na pasta que acabou de ser criada na raiz do --app-build que você passou,
-se não passou nenhum --app-build, os arquivos foram criados na raiz na pasta corrente
-do terminal que você executou o scoob: (${dir}), para subir o container baseado nas
+eles estão na pasta criada: (${dir}), para subir o container baseado nas
 suas configurações tecle S só depois de configurar os arquivos dos serviços,
 tecle S para continuar: [S / N]: " continue
 

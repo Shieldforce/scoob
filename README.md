@@ -16,12 +16,21 @@ scoob
 scoob --help
 ```
 
-### Os tipos de implementação são:
+### Para remover uma implementação de container:
 ```
-scoob --type docker-php
+scoob --type docker-remove {nome do container}
 ```
 
-### Exemplos:
+### Os tipos de implementação são:
 ```
-scoob --type docker-php --version 7.4 --port 9001
+scoob --type docker-php-nginx
+```
+
+### Exemplos de container para php/nginx:
+- --type           : Tipo do container para php sempre será (docker-php-nginx)
+- --version        : Versão do PHP Versões disponíveis (7.4, 8.1, 8.2)
+- --port           : Porta de Exposição do container
+- --app-build      : Pasta que o container irá implementar
+```
+scoob --type docker-php-nginx --version 7.4 --port 8081 --app-build .
 ```

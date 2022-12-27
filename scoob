@@ -35,7 +35,7 @@ for ARG in "$@"; do
     echo "";
   fi
 
-  # Chama a execução do tipo se passado o argumento --type!
+  # Chama a deleção de container e image se passado o argumento --docker-remove!
   if [[ "$ARG" == *--docker-remove* ]]; then
     echo "";
     bash $path_dir/progs/docker-remove.sh "$@"

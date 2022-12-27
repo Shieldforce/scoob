@@ -1,6 +1,6 @@
 #!/bin/bash
 
-types=("docker-php")
+types=("docker-php-nginx")
 versions=("7.4")
 
 if [ -v $2 ]; then
@@ -8,7 +8,7 @@ if [ -v $2 ]; then
   echo "aceitáveis são: $(printf '%s, ' "${types[@]}") "
   exit
 else
-  if [[ "$2" = "docker-php" ]]; then
+  if [[ "$2" = "docker-php-nginx" ]]; then
     if [ -v $3 ]; then
       echo "Você precisa passar a flag --version como terceiro parâmetro!!"
       exit
