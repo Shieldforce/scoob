@@ -15,3 +15,10 @@ echo "alias scoob='bash $(pwd)/scoob'" >> ~/.bashrc; source ~/.bashrc
 scoob
 scoob --help
 ```
+
+### Os tipos de implementação são:
+```
+scoob --type docker-php
+scoob --type docker-laravel
+scoob --type docker-node
+```

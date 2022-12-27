@@ -8,7 +8,7 @@ declare -x path_dir
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-if [ $# -lt 1 ]; then
+if [[ $# -lt 1 ]]; then
   echo "";
   # Chama o icon se não for passado argumentos!
   bash $path_dir/progs/icon.sh
@@ -19,14 +19,21 @@ fi
 
 COUNT=0
 for ARG in "$@"; do
-   COUNT=`expr $COUNT + 1`
+  COUNT=`expr $COUNT + 1`
 
-   # Chama o help se passado o argumento --help!
-   if [[ "$ARG" == *help* ]]; then
-     echo "";
-     bash $path_dir/progs/help.sh
-     echo "";
-   fi
+  # Chama o help se passado o argumento --help!
+  if [[ "$ARG" == *--help* ]]; then
+    echo "";
+    bash $path_dir/progs/help.sh
+    echo "";
+  fi
+
+  # Chama a execução do tipo se passado o argumento --type!
+  if [[ "$ARG" == *--type* ]]; then
+    echo "";
+    bash $path_dir/progs/type.sh "$@"
+    echo "";
+  fi
 done
 
 
