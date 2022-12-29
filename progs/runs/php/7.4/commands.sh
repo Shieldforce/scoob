@@ -2,7 +2,7 @@
 
 container=$1
 migrate=""
-container=""
+composer=""
 
 if [[ "$*" == *--migrate-seed* ]]; then
   migrate="--migrate-seed";

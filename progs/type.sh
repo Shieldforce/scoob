@@ -1,6 +1,6 @@
 #!/bin/bash
 
-types=("docker-php-nginx")
+types=("docker-php-nginx" "docker-laravel")
 versions=("7.4")
 
 if [ -v $2 ]; then
@@ -13,8 +13,21 @@ else
       echo "Você precisa passar a flag --version como terceiro parâmetro!!"
       exit
     else
-      if [[ "$4" = "7.4" ]] || [[ "$4" = "8.1" ]] || [[ "$4" = "8.2" ]]; then
+      if [[ "$4" = "7.3" ]] || [[ "$4" = "7.4" ]] || [[ "$4" = "8.1" ]] || [[ "$4" = "8.2" ]]; then
         bash ${path_dir}/progs/runs/php/$4/run.sh "$@"
+      else
+        echo "Você precisa escolher uma versão, as versões "
+        echo "disponíveis são: $(printf '%s, ' "${versions[@]}") "
+        exit
+      fi
+    fi
+  elif [[ "$2" = "docker-laravel" ]]; then
+    if [ -v $3 ]; then
+      echo "Você precisa passar a flag --version como terceiro parâmetro!!"
+      exit
+    else
+      if [[ "$4" = "7.3" ]] || [[ "$4" = "7.4" ]] || [[ "$4" = "8.1" ]] || [[ "$4" = "8.2" ]]; then
+        bash ${path_dir}/progs/runs/laravel/$4/run.sh "$@"
       else
         echo "Você precisa escolher uma versão, as versões "
         echo "disponíveis são: $(printf '%s, ' "${versions[@]}") "
