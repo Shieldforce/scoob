@@ -52,8 +52,11 @@ if docker exec -it $container cat artisan &> /dev/null; then
     fi
   else
     if docker exec -it $container cat .env.example &> /dev/null; then
+      if docker exec -it $container cat .env &> /dev/null; then
+        echo "";
+      else
         docker exec -it $container su -c "cp .env.example .env" -s /bin/sh $(whoami)
-        docker exec -it $container su -c "yes | php artisan migrate --seed --force --no-interaction" -s /bin/sh $(whoami)
+      fi
     fi
   fi
 fi
