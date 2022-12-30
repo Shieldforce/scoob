@@ -3,11 +3,8 @@
 ---
 
 ### Requisitos obrigatórios:
-- shell bash
-- docker
-- docker-compose
-- 
----
+- Shell bash
+- Docker
 
 ### Rode o comando para criar um alias para o scoob: 
 ```
@@ -40,7 +37,7 @@ scoob --docker-prune
 ```
 ---
 
-### Exemplos de container para php/nginx:
+### Exemplos de container para php/nginx e laravel:
 - --type                (obrigatório) : Tipo do container para php sempre será (docker-php-nginx)
 - --version             (obrigatório) : Versão do PHP Versões disponíveis (7.3, 7.4, 8.1, 8.2)
 - --port                (obrigatório) : Porta de Exposição do container
