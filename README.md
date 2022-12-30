@@ -53,22 +53,22 @@ scoob --docker-prune
 
 Este comando vai instalar um container com php/nginx, atualizar a vendor e rodar as migrations e seeds (Caso muito útil e, laravel),
 é possível implementar ao invés de --type docker-php-nginx, assim: --type docker-laravel, a diferença é que no container para laravel,
-subimos o nginx, mariadb, redis, cron, horizon!
+subimos o nginx, mariadb, redis, cron, horizon. use portas entre 10 e 99, pois essa porta será concatenada com as portas de banco e redis.
 ```
-scoob --type docker-php-nginx --version 8.1 --port 8081 --composer-update --migrate-seed
+scoob --type docker-php-nginx --version 8.1 --port 81 --composer-update --migrate-seed
 ```
 
 #### Este comando vai instalar um container com php/nginx, atualizar a vendor e resetar as migrations e seeds (Caso muito útil e, laravel):
 ```
-scoob --type docker-php-nginx --version 8.1 --port 8081 --composer-update --migrate-fresh
+scoob --type docker-php-nginx --version 8.1 --port 81 --composer-update --migrate-fresh
 ```
 
 #### Este comando vai instalar um container com php/nginx, atualizar a vendor:
 ```
-scoob --type docker-php-nginx --version 8.1 --port 8081 --composer-update
+scoob --type docker-php-nginx --version 8.1 --port 81 --composer-update
 ```
 
 #### Este comando vai instalar um container com php/nginx:
 ```
-scoob --type docker-php-nginx --version 8.1 --port 8081
+scoob --type docker-php-nginx --version 8.1 --port 81
 ```
