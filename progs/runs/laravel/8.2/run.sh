@@ -1,16 +1,18 @@
 #!/bin/bash
 
 if [ -v $5 ] && [ -v $6 ] && [[ "$5" = "--port" ]]; then
-  port=8081
+  port=82
 else
   port=$6
 fi
 
-mysql_port=33681
-redis_port=63781
+mysql_port=33${port}
+redis_port=637${port}
 
 container="laravel-php-fpm-${4}-${port}"
 
+sed -i "s/|mysql_port|/${mysql_port}/" $dir/mariadb/50-server.cnf
+sed -i "s/|redis_port|/${redis_port}/" $dir/redis/redis.conf
 # -----------------------------------------------------------
 
 dir=scoob_implements/laravel/${4}
