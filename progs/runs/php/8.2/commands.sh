@@ -42,18 +42,18 @@ if docker exec -it $container cat artisan &> /dev/null; then
   docker exec -it $container chmod -R 777 bootstrap/ &> /dev/null
   if docker exec -it $container cat .env &> /dev/null; then
     if [[ $migrate = "--migrate-seed" ]]; then
-      docker exec -it $container su -c "php artisan migrate --seed" -s /bin/sh $(whoami)
+      docker exec -it $container su -c "yes | php artisan migrate --seed --force --no-interaction" -s /bin/sh $(whoami)
     fi
     if [[ $migrate = "--migrate-fresh" ]]; then
-      docker exec -it $container su -c "php artisan migrate:fresh --seed" -s /bin/sh $(whoami)
+      docker exec -it $container su -c "yes | php artisan migrate:fresh --seed --force --no-interaction" -s /bin/sh $(whoami)
     fi
     if [[ $migrate = "--migrate" ]]; then
-      docker exec -it $container su -c "php artisan migrate" -s /bin/sh $(whoami)
+      docker exec -it $container su -c "yes | php artisan migrate --force --no-interaction" -s /bin/sh $(whoami)
     fi
   else
     if docker exec -it $container cat .env.example &> /dev/null; then
         docker exec -it $container su -c "cp .env.example .env" -s /bin/sh $(whoami)
-        docker exec -it $container su -c "php artisan migrate --seed" -s /bin/sh $(whoami)
+        docker exec -it $container su -c "yes | php artisan migrate --seed --force --no-interaction" -s /bin/sh $(whoami)
     fi
   fi
 fi
