@@ -32,6 +32,7 @@ if docker exec -it $container cat composer.json &> /dev/null; then
   else
     if [[ $composer = "--composer-update" ]]; then
        docker exec -it $container su -c "composer update" -s /bin/sh $(whoami)
+       docker exec -it $container su -c "php artisan storage:link" -s /bin/sh $(whoami)
     fi
   fi
 fi
