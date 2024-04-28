@@ -6,9 +6,21 @@
 - Shell bash
 - Docker
 
+### Clone o scoob:
+```
+git clone https://github.com/Shieldforce/scoob.git
+```
+---
+
+### Acesse a pasta dele:
+```
+cd scoob
+```
+---
+
 ### Rode o comando para criar um alias para o scoob: 
 ```
-echo "alias scoob='bash $(pwd)/scoob/scoob'" >> ~/.bashrc; source ~/.bashrc
+echo "alias scoob='bash $(pwd)/scoob'" >> ~/.bashrc; source ~/.bashrc
 ```
 ---
 
