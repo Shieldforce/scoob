@@ -1,6 +1,8 @@
 # Scoob
 
-### Scoob já contém um nginx, php-fpm, supervisor instalados em um Debian GNU/Linux 12 (bookworm).
+### No caso de php puro o Scoob já contém um nginx, php-fpm, supervisor instalados em um Debian GNU/Linux 12 (bookworm).
+
+### No caso de Laravel puro o Scoob já contém um nginx, php-fpm, supervisor, redis, mysql instalados em um Debian GNU/Linux 12 (bookworm).
 
 ---
 
