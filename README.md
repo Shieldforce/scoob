@@ -72,7 +72,7 @@ scoob --type docker-php-nginx --version 8.1 --port 81 --composer-update --migrat
 
 #### Este comando vai instalar um container com php/nginx, atualizar a vendor e resetar as migrations e seeds (Caso muito útil e, laravel):
 ```
-scoob --type docker-php-nginx --version 8.1 --port 81 --composer-update --migrate-fresh
+scoob --type docker-laravel --version 8.1 --port 81 --composer-update --migrate-fresh
 ```
 
 #### Este comando vai instalar um container com php/nginx, atualizar a vendor:
