@@ -96,8 +96,8 @@ docker start {container-name}
 ```
 #### O index aponta para:
 ```
-publ
-
+public/index.php
+```
 #### Para entrar no container:
 ```
 docker exec -it {container-id} bash
