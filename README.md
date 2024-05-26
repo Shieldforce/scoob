@@ -96,5 +96,28 @@ docker start {container-name}
 ```
 #### O index aponta para:
 ```
-public/index.php
+publ
+
+#### Para entrar no container:
+```
+docker exec -it {container-id} bash
+```
+
+#### Ver os processos do supervisor:
+```
+docker exec -it {container-id} supervisorctl status
+```
+
+#### Sistema Operacional:
+```
+docker exec -it b96c8b3e9947 cat /etc/os-release
+    PRETTY_NAME="Debian GNU/Linux 12 (bookworm)"
+    NAME="Debian GNU/Linux"
+    VERSION_ID="12"
+    VERSION="12 (bookworm)"
+    VERSION_CODENAME=bookworm
+    ID=debian
+    HOME_URL="https://www.debian.org/"
+    SUPPORT_URL="https://www.debian.org/support"
+    BUG_REPORT_URL="https://bugs.debian.org/"
 ```
