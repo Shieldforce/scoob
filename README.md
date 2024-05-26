@@ -94,3 +94,7 @@ b96c8b3e9947   php-fpm-8.3-8073   "docker-php-entrypoi…"   3 minutes ago   Up 
 ```
 docker start {container-name}
 ```
+#### O index aponta para:
+```
+public/index.php
+```
