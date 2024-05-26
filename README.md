@@ -1,5 +1,7 @@
 # Scoob
 
+### Scoob já contém um nginx e o php-fpm instalado em um Debian GNU/Linux 12 (bookworm).
+
 ---
 
 ### Requisitos obrigatórios:
