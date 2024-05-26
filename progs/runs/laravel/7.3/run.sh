@@ -1,13 +1,22 @@
 #!/bin/bash
 
 if [ -v $5 ] && [ -v $6 ] && [[ "$5" = "--port" ]]; then
-  port=73
+  port=83
 else
   port=$6
 fi
 
-mysql_port=33${port}
-redis_port=637${port}
+if [ -v $7 ] && [ -v $8 ] && [[ "$7" = "--redis-port" ]]; then
+    redis_port=6386
+else
+    redis_port=${$8}
+fi
+
+if [ -v $9 ] && [ -v $10 ] && [[ "$9" = "--mysql-port" ]]; then
+    mysql_port=3386
+else
+    mysql_port=${10}
+fi
 
 container="laravel-php-fpm-${4}-${port}"
 

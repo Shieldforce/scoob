@@ -33,7 +33,8 @@ RUN apt-get update && \
     nginx \
     redis-server \
     mariadb-server \
-    mariadb-client
+    mariadb-client \
+    nano
 
 RUN apt-get update && apt-get upgrade -y
 
