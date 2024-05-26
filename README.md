@@ -110,7 +110,7 @@ docker exec -it {container-id} supervisorctl status
 
 #### Sistema Operacional:
 ```
-docker exec -it b96c8b3e9947 cat /etc/os-release
+docker exec -it {container-id} cat /etc/os-release
     PRETTY_NAME="Debian GNU/Linux 12 (bookworm)"
     NAME="Debian GNU/Linux"
     VERSION_ID="12"
