@@ -82,7 +82,7 @@ scoob --type docker-php-nginx --version 8.1 --port 81 --composer-update
 scoob --type docker-php-nginx --version 8.1 --port 81
 ```
 
-#### Listar containers (Seu container deve ser o nome que você colocou no --type + --port Exemplo: [php-fpm-8.3-8073]):
+#### Listar containers Exemplo:  --type + --port [php-fpm-8.3-8073] :
 ```
 docker ps
 ```
