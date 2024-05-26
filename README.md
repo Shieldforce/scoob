@@ -81,3 +81,8 @@ scoob --type docker-php-nginx --version 8.1 --port 81 --composer-update
 ```
 scoob --type docker-php-nginx --version 8.1 --port 81
 ```
+
+#### Subir Container depois dele já configurado:
+```
+docker start {container-name}
+```
