@@ -85,6 +85,8 @@ scoob --type docker-php-nginx --version 8.1 --port 81
 #### Listar containers Exemplo:  --type + --port [php-fpm-8.3-8073] :
 ```
 docker ps
+CONTAINER ID   IMAGE              COMMAND                  CREATED         STATUS         PORTS                                                       NAMES
+b96c8b3e9947   php-fpm-8.3-8073   "docker-php-entrypoi…"   3 minutes ago   Up 3 minutes   8073/tcp, 9000/tcp, 0.0.0.0:8073->80/tcp, :::8073->80/tcp   php-fpm-8.3-8073
 ```
 
 #### Subir Container depois dele já configurado:
