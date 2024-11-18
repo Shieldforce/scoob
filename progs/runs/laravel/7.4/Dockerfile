@@ -41,7 +41,7 @@ RUN apt-get update && apt-get upgrade -y
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 RUN docker-php-ext-install zip simplexml pcntl gd fileinfo \
-    mysqli pdo pdo_mysql pdo_pgsql pgsql session xml
+    mysqli pdo pdo_mysql pdo_pgsql pgsql session xml intl
 
 RUN pecl install redis-${REDIS_LIB_VERSION} \
     && docker-php-ext-enable redis
