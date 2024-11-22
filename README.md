@@ -10,6 +10,13 @@
 - Shell bash
 - Docker
 
+
+### Vá para pasta do usuário:
+```
+cd ~/
+```
+---
+
 ### Clone o scoob:
 ```
 git clone https://github.com/Shieldforce/scoob.git
