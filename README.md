@@ -79,6 +79,11 @@ subimos o nginx, mariadb, redis, cron, horizon. use portas entre 10 e 99, pois e
 scoob --type docker-php-nginx --version 8.1 --port 81 --composer-update --migrate-seed
 ```
 
+#### Este comando vai instalar um container com php e nginx:
+```
+scoob --type docker-laravel --version 8.3 --port 8811
+```
+
 #### Este comando vai instalar um container com nginx, php-fpm, supervisor, redis, mysql e atualizar a vendor e resetar as migrations e seeds (Laravel Framework):
 ```
 scoob --type docker-laravel --version 8.3 --port 8073 --redis-port 6386 --mysql-port 3386 --composer-update --migrate-fresh
