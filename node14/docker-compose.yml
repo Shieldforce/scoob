@@ -1,0 +1,17 @@
+services:
+  node:
+    container_name: 'node-14'
+    build: .
+    #image: "node:14"
+    #user: "node"
+    working_dir: /home/node/app
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - ./:/home/node/app:delegated
+    expose:
+      - "3014"
+    ports:
+      - "3014:3014"
+    command: "yarn start"
+    entrypoint: ["/bin/sh", "-c", "yarn install && yarn start"]

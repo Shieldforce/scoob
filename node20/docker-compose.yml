@@ -1,0 +1,17 @@
+services:
+  node:
+    container_name: 'node-20'
+    build: .
+    #image: "node:20"
+    #user: "node"
+    working_dir: /home/node/app
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - ./:/home/node/app:delegated
+    expose:
+      - "3020"
+    ports:
+      - "3020:3020"
+    command: "npm run start"
+    entrypoint: ["/bin/sh", "-c", "npm install && npm run start"]

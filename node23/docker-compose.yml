@@ -1,0 +1,17 @@
+services:
+  node:
+    container_name: 'node-23'
+    build: .
+    #image: "node:23"
+    #user: "node"
+    working_dir: /home/node/app
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - ./:/home/node/app:delegated
+    expose:
+      - "3023"
+    ports:
+      - "3023:3023"
+    command: "yarn start"
+    entrypoint: ["/bin/sh", "-c", "yarn install && yarn start"]
