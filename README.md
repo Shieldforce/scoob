@@ -156,37 +156,37 @@ docker exec -it {container-id} cat /etc/os-release
 
 #Requisitos: Docker
 
-#Container (Node 14) + (Yarn 1.22.22) + (Express ^4.17.1) + (Nodemon)
+#Container PORTA: 3014 (Node 14) + (Yarn 1.22.22) + (Express ^4.17.1) + (Nodemon)
 ```
 docker-compose -f ./node14/docker-compose.yml up -d --build
 ```
 
-#Container (Node 16) + (Yarn 1.22.22) + (Express ^4.18.2) + (Nodemon)
+#Container PORTA: 3016 (Node 16) + (Yarn 1.22.22) + (Express ^4.18.2) + (Nodemon)
 ```
 docker-compose -f ./node16/docker-compose.yml up -d --build
 ```
 
-#Container (Node 18) + (Yarn 1.22.22) + (Express ^4.17.1) + (Nodemon)
+#Container PORTA: 3018 (Node 18) + (Yarn 1.22.22) + (Express ^4.17.1) + (Nodemon)
 ```
 docker-compose -f ./node18/docker-compose.yml up -d --build
 ```
 
-#Container (Node 20) + (Yarn *) + (Express *) + (Nodemon)
+#Container PORTA: 3020 (Node 20) + (Yarn *) + (Express *) + (Nodemon)
 ```
 docker-compose -f ./node20/docker-compose.yml up -d --build
 ```
 
-#Container (Node 21) + (Yarn *) + (Express *) + (Nodemon)
+#Container PORTA: 3021 (Node 21) + (Yarn *) + (Express *) + (Nodemon)
 ```
 docker-compose -f ./node21/docker-compose.yml up -d --build
 ```
 
-#Container (Node 22) + (Yarn *) + (Express *) + (Nodemon)
+#Container PORTA: 3022 (Node 22) + (Yarn *) + (Express *) + (Nodemon)
 ```
 docker-compose -f ./node22/docker-compose.yml up -d --build
 ```
 
-#Container (Node 23) + (Yarn *) + (Express *) + (Nodemon)
+#Container PORTA: 3023 (Node 23) + (Yarn *) + (Express *) + (Nodemon)
 ```
 docker-compose -f ./node23/docker-compose.yml up -d --build
 ```
