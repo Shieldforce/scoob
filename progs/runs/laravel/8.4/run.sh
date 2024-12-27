@@ -1,28 +1,28 @@
 #!/bin/bash
 
+port=8884
+redis_port=6384
+mysql_port=3384
+
 if [ -v $5 ] && [ -v $6 ] && [[ "$5" = "--port" ]]; then
   port=8884
-else
-  port=$6
+elif [ -n "$6" ] && [[ "$5" == "--port" ]]; then
+  port=${6}
 fi
 
 if [ -v $7 ] && [ -v $8 ] && [[ "$7" = "--redis-port" ]]; then
     redis_port=6384
-else
-    redis_port=${$8}
+elif [ -n "$8" ] && [[ "$7" == "--redis-port" ]]; then
+    redis_port=${8}
 fi
 
 if [ -v $9 ] && [ -v $10 ] && [[ "$9" = "--mysql-port" ]]; then
     mysql_port=3384
-else
+elif [ -n "$10" ] && [[ "$9" == "--mysql-port" ]]; then
     mysql_port=${10}
 fi
 
 container="laravel-php-fpm-${4}-${port}"
-
-sed -i "s/|mysql_port|/${mysql_port}/" $dir/mariadb/50-server.cnf
-sed -i "s/|redis_port|/${redis_port}/" $dir/redis/redis.conf
-# -----------------------------------------------------------
 
 dir=scoob_implements/laravel/${4}
 
@@ -58,6 +58,10 @@ cp -R ${path_dir}/progs/runs/laravel/${4}/redis $dir
 cp -R ${path_dir}/progs/runs/laravel/${4}/supervisord $dir
 cp ${path_dir}/progs/runs/laravel/${4}/Dockerfile $dir
 cp ${path_dir}/progs/runs/laravel/${4}/commands.sh $dir
+
+sed -i "s/|mysql_port|/${mysql_port}/" $dir/mariadb/50-server.cnf
+sed -i "s/|redis_port|/${redis_port}/" $dir/redis/redis.conf
+# -----------------------------------------------------------
 
 chmod 777 $dir
 
