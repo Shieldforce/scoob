@@ -64,4 +64,4 @@ EXPOSE ${EXPOSE_PORT} ${MYSQL_PORT} ${REDIS_PORT}
 # finish dockerfile
 ADD ${PATH_DIR}/supervisord/supervisord.conf /etc/supervisor/supervisord.conf
 ADD ${PATH_DIR}/supervisord/conf /etc/supervisord.d/
-CMD /usr/bin/supervisord -n
+CMD ["supervisord", "-n"]
