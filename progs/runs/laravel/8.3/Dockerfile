@@ -7,7 +7,6 @@ ARG REDIS_PORT
 ARG PATH_DIR
 ARG PATH_COR
 ARG APP_DIR=/var/www
-ARG REDIS_LIB_VERSION=5.3.7
 ENV MARIADB_MYSQL_SOCKET_DIRECTORY='/var/run/mysqld'
 ### Args ------------------------
 
@@ -41,7 +40,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 RUN docker-php-ext-install zip simplexml pcntl gd fileinfo \
     mysqli pdo pdo_mysql pdo_pgsql pgsql session xml intl
 
-RUN pecl install redis-${REDIS_LIB_VERSION} \
+RUN pecl install redis \
     && docker-php-ext-enable redis
 
 # Layers Copy folders and file to local
