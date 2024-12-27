@@ -87,11 +87,20 @@ docker exec -it {container-name} bash
 ### Listar serviços pendurados no supervisor:
 ```
 docker exec -it {container-name} supervisorctl status
+
+A saída tem que ser parecdia com isso:
+horizon                          RUNNING   pid 61, uptime 0:00:44
+mariadb                          RUNNING   pid 62, uptime 0:00:44
+nginx                            RUNNING   pid 63, uptime 0:00:44
+php-fpm                          RUNNING   pid 64, uptime 0:00:44
+redis                            RUNNING   pid 65, uptime 0:00:44
 ```
 ### Resetar serviços pendurados no supervisor:
 ```
 docker exec -it {container-name} supervisorctl restart all
 ```
+
+### Cada serviço está explicado a baixo caso falhar!
 
 ---
 ### Acessar redis do container:
@@ -113,6 +122,9 @@ REDIS_HOST=127.0.0.1
 REDIS_PASSWORD=null
 REDIS_PORT={porta_configurada}
 ```
+### Se precisar colocar senha no redis só passar o parâmetro no arquivo de configuração do redis:
+### /etc/redis/redis.conf
+### requirepass myStrongPassword123!
 
 ---
 ### Acessar mysql do container:
@@ -148,6 +160,12 @@ DB_DATABASE={db_name}
 DB_USERNAME=root
 DB_PASSWORD={senha_desejada}
 ```
+
+### Rodar Migrate (Se pedir para criar banco cujo o nome está na variável DB_DATABASE, aceite):
+```
+docker exec -it {container-name} php artisan migrate
+```
+
 
 ### Rodar Horizon (Se não estiver instalado rode o primeiro comando):
 ```
