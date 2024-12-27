@@ -71,8 +71,18 @@ docker ps
 CONTAINER ID   IMAGE              COMMAND                  CREATED         STATUS         PORTS                                                       NAMES
 f6d5sf6f56f5   php-fpm-8.4-8084   "docker-php-entrypoi…"   1 minutes ago   Up 1 minutes   8073/tcp, 9000/tcp, 0.0.0.0:8084->80/tcp, :::8084->80/tcp   php-fpm-8.4-8084
 ```
-
+---
+Este comando vai instalar um container com laravel/mysql/redis/supervisor.
+```
+scoob --type docker-laravel --version 8.4 --port 8094 --redis-port 6394 --mysql-port 3394
+```
+---
 ## Supervisor  (No caso de containers: --type docker-laravel)
+
+### Acessar bash do container:
+```
+docker exec -it {container-name} bash
+```
 
 ### Listar serviços pendurados no supervisor:
 ```
@@ -81,4 +91,66 @@ docker exec -it {container-name} supervisorctl status
 ### Resetar serviços pendurados no supervisor:
 ```
 docker exec -it {container-name} supervisorctl restart all
+```
+
+---
+### Acessar redis do container:
+Se não passou porta, ela será no caso de 
+- php7.3: 6373
+- php7.4: 6374
+- php8.1: 6381
+- php8.2: 6382
+- php8.3: 6383
+- php8.4: 6384
+Se passou --redis-port será o valor passado:
+```
+docker exec -it {container-name} redis-cli -p {port}
+```
+
+### Env Redis:
+```
+REDIS_HOST=127.0.0.1
+REDIS_PASSWORD=null
+REDIS_PORT={porta_configurada}
+```
+
+---
+### Acessar mysql do container:
+Se não passou porta, ela será no caso de
+- php7.3: 3373
+- php7.4: 3374
+- php8.1: 3381
+- php8.2: 3382
+- php8.3: 3383
+- php8.4: 3384
+  Se passou --mysql-port será o valor passado:
+```
+docker exec -it {container-name} mysql
+MariaDB [(none)]> create database {db_name};
+O resultado tem que ser: (Query OK, 1 row affected (0.000 sec))
+```
+
+### Acesso root:
+```
+docker exec -it {container-name} mysql
+MariaDB [(none)]> GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '{senha_desejada}' WITH GRANT OPTION;
+MariaDB [(none)]> GRANT ALL PRIVILEGES ON *.* TO 'root'@'%.%.%.%' IDENTIFIED BY 'senha_desejada' WITH GRANT OPTION;
+MariaDB [(none)]> GRANT ALL PRIVILEGES ON *.* TO 'root'@'0.0.0.0' IDENTIFIED BY 'senha_desejada' WITH GRANT OPTION;
+MariaDB [(none)]> GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' IDENTIFIED BY 'senha_desejada' WITH GRANT OPTION;
+```
+
+### Env Mysql:
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT={porta que configurou}
+DB_DATABASE={db_name}
+DB_USERNAME=root
+DB_PASSWORD={senha_desejada}
+```
+
+### Rodar Horizon (Se não estiver instalado rode o primeiro comando):
+```
+docker exec -it {container-name} composer require laravel/horizon
+docker exec -it {container-name} php artisan horizon:install
 ```
