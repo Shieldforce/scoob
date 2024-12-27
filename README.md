@@ -71,3 +71,14 @@ docker ps
 CONTAINER ID   IMAGE              COMMAND                  CREATED         STATUS         PORTS                                                       NAMES
 f6d5sf6f56f5   php-fpm-8.4-8084   "docker-php-entrypoi…"   1 minutes ago   Up 1 minutes   8073/tcp, 9000/tcp, 0.0.0.0:8084->80/tcp, :::8084->80/tcp   php-fpm-8.4-8084
 ```
+
+## Supervisor  (No caso de containers: --type docker-laravel)
+
+### Listar serviços pendurados no supervisor:
+```
+docker exec -it {container-name} supervisorctl status
+```
+### Resetar serviços pendurados no supervisor:
+```
+docker exec -it {container-name} supervisorctl restart all
+```

@@ -31,7 +31,8 @@ RUN apt-get update && \
     redis-server \
     mariadb-server \
     mariadb-client \
-    nano
+    nano \
+    cron
 
 RUN apt-get update && apt-get upgrade -y
 
