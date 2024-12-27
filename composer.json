@@ -12,6 +12,6 @@
             "email": "shieldforce2@gmail.com"
         }
     ],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "require": {}
 }
