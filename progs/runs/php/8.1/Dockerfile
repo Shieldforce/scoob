@@ -1,6 +1,4 @@
-ARG VERSION
-
-FROM php:${VERSION}-fpm
+FROM php:8.1-fpm
 
 ### Args ------------------------
 ARG EXPOSE_PORT
