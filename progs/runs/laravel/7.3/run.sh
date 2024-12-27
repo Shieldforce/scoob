@@ -1,19 +1,19 @@
 #!/bin/bash
 
 if [ -v $5 ] && [ -v $6 ] && [[ "$5" = "--port" ]]; then
-  port=83
+  port=8873
 else
   port=$6
 fi
 
 if [ -v $7 ] && [ -v $8 ] && [[ "$7" = "--redis-port" ]]; then
-    redis_port=6386
+    redis_port=6373
 else
     redis_port=${$8}
 fi
 
 if [ -v $9 ] && [ -v $10 ] && [[ "$9" = "--mysql-port" ]]; then
-    mysql_port=3386
+    mysql_port=3373
 else
     mysql_port=${10}
 fi

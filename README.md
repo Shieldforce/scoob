@@ -38,12 +38,12 @@ scoob --type docker-remove {container-name}
 
 ### Implementar um container PHP Puro:
 ```
-scoob --type docker-php-nginx
+scoob --type docker-php-nginx {parametros obrigatórios}
 ```
 
 ### Implementar um container Laravel:
 ```
-scoob --type docker-laravel
+scoob --type docker-laravel {parametros obrigatórios}
 ```
 
 ### Limpar tudo que não está sendo usado no docker (CUIDADO, IRÁ EXCLUIR TUDO QUE NÃO ESTÁ SENDO USADO!):
