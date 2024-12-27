@@ -1,30 +1,16 @@
 #!/bin/bash
 
 if [ -v $5 ] && [ -v $6 ] && [[ "$5" = "--port" ]]; then
-  port=8882
+  port=8084
 else
   port=$6
 fi
 
-if [ -v $7 ] && [ -v $8 ] && [[ "$7" = "--redis-port" ]]; then
-    redis_port=6382
-else
-    redis_port=${$8}
-fi
+container="php-fpm-${4}-${port}"
 
-if [ -v $9 ] && [ -v $10 ] && [[ "$9" = "--mysql-port" ]]; then
-    mysql_port=3382
-else
-    mysql_port=${10}
-fi
-
-container="laravel-php-fpm-${4}-${port}"
-
-sed -i "s/|mysql_port|/${mysql_port}/" $dir/mariadb/50-server.cnf
-sed -i "s/|redis_port|/${redis_port}/" $dir/redis/redis.conf
 # -----------------------------------------------------------
 
-dir=scoob_implements/laravel/${4}
+dir=scoob_implements/php/${4}
 
 if [ -d $dir ]; then
   echo "Diretório scoob_implements ok!"
@@ -35,29 +21,27 @@ else
     mkdir scoob_implements
   fi
 
-  if [ -d scoob_implements/laravel ]; then
-    echo "Diretório laravel ok!"
+  if [ -d scoob_implements/php ]; then
+    echo "Diretório php ok!"
   else
-    cd scoob_implements && mkdir laravel
+    cd scoob_implements && mkdir php
     cd ..
   fi
 
-  if [ -d scoob_implements/laravel/${4} ]; then
+  if [ -d scoob_implements/php/${4} ]; then
     echo "Diretório ${4} ok!"
   else
-    cd scoob_implements/laravel && mkdir ${4}
+    cd scoob_implements/php && mkdir ${4}
     cd ..
     cd ..
   fi
 fi
 
-cp -R ${path_dir}/progs/runs/laravel/${4}/nginx $dir
-cp -R ${path_dir}/progs/runs/laravel/${4}/php $dir
-cp -R ${path_dir}/progs/runs/laravel/${4}/mariadb $dir
-cp -R ${path_dir}/progs/runs/laravel/${4}/redis $dir
-cp -R ${path_dir}/progs/runs/laravel/${4}/supervisord $dir
-cp ${path_dir}/progs/runs/laravel/${4}/Dockerfile $dir
-cp ${path_dir}/progs/runs/laravel/${4}/commands.sh $dir
+cp -R ${path_dir}/progs/runs/php/${4}/nginx $dir
+cp -R ${path_dir}/progs/runs/php/${4}/php $dir
+cp -R ${path_dir}/progs/runs/php/${4}/supervisord $dir
+cp ${path_dir}/progs/runs/php/${4}/Dockerfile $dir
+cp ${path_dir}/progs/runs/php/${4}/commands.sh $dir
 
 chmod 777 $dir
 
@@ -76,8 +60,6 @@ if [[ "$continue" = "s" ]] || [[ "$continue" = "s" ]]; then
   docker build \
               -t ${container} \
               --build-arg EXPOSE_PORT=${port} \
-              --build-arg MYSQL_PORT=${mysql_port} \
-              --build-arg REDIS_PORT=${redis_port} \
               --build-arg PATH_DIR=${dir} \
               --build-arg PATH_COR=$(pwd) \
               --build-arg VERSION=${4} \
