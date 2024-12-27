@@ -1,0 +1,17 @@
+{
+    "name": "shieldforce/scoob",
+    "description": "Pacote para gerar container rápidos",
+    "autoload": {
+        "psr-4": {
+            "Shieldforce\\Scoob\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Alexandre Ferreira",
+            "email": "shieldforce2@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
