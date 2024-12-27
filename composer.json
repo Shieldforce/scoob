@@ -1,6 +1,7 @@
 {
     "name": "shieldforce/scoob",
     "description": "Pacote para gerar containers rápidos",
+    "license": "MIT",
     "autoload": {
         "psr-4": {
             "Shieldforce\\Scoob\\": "src/"
