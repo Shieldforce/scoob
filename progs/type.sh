@@ -1,6 +1,6 @@
 #!/bin/bash
 
-types=("docker-php-nginx" "docker-laravel")
+types=("docker-php-nginx" "docker-laravel" "docker-remove")
 versions=("7.4","8.1","8.2","8.3")
 
 if [ -v $2 ]; then
