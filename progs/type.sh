@@ -34,6 +34,8 @@ else
         exit
       fi
     fi
+  elif [[ "$2" = "docker-remove" ]]; then
+    bash ${path_dir}/progs/docker-remove.sh "$3"
   else
     echo "Tipo de implementação não aceitável!"
     exit
