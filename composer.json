@@ -1,5 +1,5 @@
 {
-    "name": "Shieldforce/scoob",
+    "name": "shieldforce/scoob",
     "description": "Pacote para gerar container rápidos",
     "autoload": {
         "psr-4": {
