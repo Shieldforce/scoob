@@ -149,6 +149,7 @@ MariaDB [(none)]> GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '{senh
 MariaDB [(none)]> GRANT ALL PRIVILEGES ON *.* TO 'root'@'%.%.%.%' IDENTIFIED BY 'senha_desejada' WITH GRANT OPTION;
 MariaDB [(none)]> GRANT ALL PRIVILEGES ON *.* TO 'root'@'0.0.0.0' IDENTIFIED BY 'senha_desejada' WITH GRANT OPTION;
 MariaDB [(none)]> GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' IDENTIFIED BY 'senha_desejada' WITH GRANT OPTION;
+MariaDB [(none)]> FLUSH PRIVILEGES;
 ```
 
 ### Env Mysql:
