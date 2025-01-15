@@ -29,7 +29,7 @@ RUN apt-get update && \
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 RUN docker-php-ext-install zip iconv simplexml pcntl gd fileinfo \
-    mysqli pdo pdo_mysql pdo_pgsql pgsql session xml intl
+    mysqli pdo pdo_mysql pdo_pgsql pgsql session xml intl bcmath
 
 # Layers Copy folders and file to local
 COPY ${PATH_DIR}/supervisord/supervisord.conf /etc/supervisor
