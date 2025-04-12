@@ -47,7 +47,7 @@ bash ./vendor/shieldforce/scoob/scoob --type docker-php-nginx --version 8.3 --po
 
 ### Com o scoob instalado global ou localmente vc pode usar o composer dele:
 ```
-scoob --composer 'composer update'
+scoob {container-name} --composer 'composer update'
 ```
 
 ## Tipos de implementação:
