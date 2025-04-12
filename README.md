@@ -8,9 +8,13 @@
 ```
 cd ~/ && git clone https://github.com/Shieldforce/scoob.git && cd scoob
 ```
+### Crie esse alias no seu ~/.bashrc ou ~/.zshrc e rode os source ~/.bashrc ou ~/.zshrc
+```
+alias scoob='bash $HOME/scoob/scoob'
+```
 ### Criando alias para rodar o scoob em qualquer projeto:
 ```
-echo "alias scoob='bash $(pwd)/scoob'" >> ~/.bashrc; source ~/.bashrc
+echo "alias scoob='bash $HOME/scoob/scoob'" >> ~/.zshrc; source ~/.zshrc
 ```
 ---
 
