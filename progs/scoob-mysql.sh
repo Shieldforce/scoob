@@ -79,7 +79,7 @@ if docker ps -a --format '{{.Names}}' | grep -wq "$mysql_container"; then
 fi
 
 # Sobe o container MySQL
-docker run -d \
+docker run --rm \
   --name "$mysql_container" \
   -p "$mysql_port":3306 \
   -e MYSQL_ROOT_PASSWORD="$mysql_root_pass" \
