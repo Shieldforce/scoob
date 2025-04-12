@@ -85,7 +85,8 @@ scoob --mysql-ext \
     --port='3399' \
     --user='scoob_user' \
     --pass='scoob_pass' \
-    --db='scoob_db'
+    --db='scoob_db' \
+    --container='scoob-mysql'
 ```
 ---
 
