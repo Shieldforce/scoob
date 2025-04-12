@@ -16,7 +16,7 @@ done
 
 # Validação obrigatória da flag --mysql-ext (logo no início)
 if [[ -z "$mysql_ext" ]]; then
-  bash "${path_dir}/progs/error.sh" "Você precisa passar a flag obrigatória --mysql-ext=alguma_coisa"
+  bash "${path_dir}/error.sh" "Você precisa passar a flag obrigatória --mysql-ext=alguma_coisa"
   exit 1
 fi
 
@@ -91,4 +91,4 @@ docker run -d \
   mysql:"$mysql_version"
 
 echo ''
-bash "${path_dir}/progs/success.sh" "MySQL '$mysql_container' upado com sucesso na porta $mysql_port!"
+bash "${path_dir}/success.sh" "MySQL '$mysql_container' upado com sucesso na porta $mysql_port!"
