@@ -90,6 +90,7 @@ if [[ "$continue" = "s" ]] || [[ "$continue" = "s" ]]; then
               -d \
               --name ${container} \
               --restart unless-stopped \
+              --network scoob-network \
               -p "${port}:80" \
               -v $(pwd):/var/www \
               ${container}

@@ -49,12 +49,19 @@ for ARG in "$@"; do
     echo "";
   fi
 
-  # Chama a deleção de container e image se passado o argumento --docker-remove!
-    if [[ "$ARG" == *--start* ]]; then
-      echo "";
-      bash $path_dir/progs/scoob-start.sh "$@"
-      echo "";
-    fi
+  # Start o scoob
+  if [[ "$ARG" == *--start* ]]; then
+    echo "";
+    bash $path_dir/progs/scoob-start.sh "$@"
+    echo "";
+  fi
+
+  # Modo composer do scoob
+  if [[ "$ARG" == *--composer* ]]; then
+    echo "";
+    bash $path_dir/progs/scoob-composer.sh "$@"
+    echo "";
+  fi
 done
 
 
