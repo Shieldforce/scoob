@@ -21,7 +21,11 @@ echo "alias scoob='bash $HOME/scoob/scoob'" >> ~/.zshrc; source ~/.zshrc
 ---
 ## Instalando Scoob localmente:
 ```
-composer require shieldforce/scoob
+docker run --rm \
+    -u "$(id -u):$(id -g)" \
+    -v "$(pwd):/var/www/html" \
+    -w /var/www/html composer/composer \
+     composer require shieldforce/scoob
 ```
 ### Comando para rodar local:
 ```
