@@ -55,6 +55,14 @@ bash ${path_dir}/progs/question.sh "
  configurar os arquivos dos serviços!"
 read -p " tecle S para continuar: [S / N]: " continue
 
+# Verifica se a rede scoob-network já existe
+if ! docker network ls | grep -q "scoob-network"; then
+  echo "Criando rede scoob-network..."
+  docker network create scoob-network
+else
+  echo "Rede scoob-network já existe."
+fi
+
 if [[ "$continue" = "s" ]] || [[ "$continue" = "s" ]]; then
   bash ${path_dir}/progs/docker-remove.sh --docker-remove ${container}
   docker build \
