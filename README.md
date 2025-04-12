@@ -79,6 +79,16 @@ scoob --docker-prune
 ```
 ---
 
+### Roda um servidor mysql na rede scoob-network:
+```
+scoob --mysql-ext \
+    --port='3399' \
+    --user='scoob_user' \
+    --pass='scoob_pass' \
+    --db='scoob_db'
+```
+---
+
 ## Exemplos de container para php/nginx e laravel:
 - --type                   (obrigatório) : Tipo do container para php sempre será (docker-php-nginx)
 - --version                (obrigatório) : Versão do PHP Versões disponíveis (7.3, 7.4, 8.1, 8.2, 8.3,84)
