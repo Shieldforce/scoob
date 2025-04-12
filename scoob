@@ -55,6 +55,13 @@ for ARG in "$@"; do
     bash $path_dir/progs/scoob-composer.sh "$@"
     echo "";
   fi
+
+  # Scoob mysql
+    if [[ "$ARG" == *--mysql-ext* ]]; then
+      echo "";
+      bash $path_dir/progs/scoob-mysql.sh "$@"
+      echo "";
+    fi
 done
 
 
