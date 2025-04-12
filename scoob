@@ -43,9 +43,16 @@ for ARG in "$@"; do
   fi
 
   # Chama a deleção de container e image se passado o argumento --docker-remove!
-    if [[ "$ARG" == *--docker-prune* ]]; then
+  if [[ "$ARG" == *--docker-prune* ]]; then
+    echo "";
+    bash $path_dir/progs/docker-prune.sh "$@"
+    echo "";
+  fi
+
+  # Chama a deleção de container e image se passado o argumento --docker-remove!
+    if [[ "$ARG" == *--start* ]]; then
       echo "";
-      bash $path_dir/progs/docker-prune.sh "$@"
+      bash $path_dir/progs/scoob-start.sh "$@"
       echo "";
     fi
 done
