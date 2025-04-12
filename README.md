@@ -81,7 +81,7 @@ scoob --docker-prune
 
 ### Roda um servidor mysql na rede scoob-network (se rodar: scoob --mysql-ext ele roda com os parâmetros defaults):
 ```
-scoob --mysql-ext \
+scoob --mysql-ext=true \
     --port='3399' \
     --user='scoob_user' \
     --pass='scoob_pass' \
