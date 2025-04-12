@@ -3,18 +3,7 @@
 # Variables ------------------------------------------------------------------------------------------------------------
 path_dir="${0%/*}"
 
-# Verifica se existe a pasta scoob no projeto, senão usa a de ~/
-if [[ -d "$path_dir/scoob" ]]; then
-  scoob_path="$path_dir/scoob"
-elif [[ -d "$HOME/scoob" ]]; then
-  scoob_path="$HOME/scoob"
-else
-  echo "Erro: Pasta 'scoob' não encontrada nem no projeto nem em ~/scoob."
-  exit 1
-fi
-
-# Exporta o caminho para a scoob
-declare -x scoob_path
+# Global variables -----------------------------------------------------------------------------------------------------
 declare -x path_dir
 
 # ----------------------------------------------------------------------------------------------------------------------
@@ -22,41 +11,51 @@ declare -x path_dir
 if [[ $# -lt 1 ]]; then
   echo "";
   # Chama o icon se não for passado argumentos!
-  bash "$path_dir/progs/icon.sh"
+  bash $path_dir/progs/icon.sh
   # Chama o help se não for passado argumentos!
-  bash "$path_dir/progs/help.sh"
+  bash $path_dir/progs/help.sh
   echo "";
 fi
 
 COUNT=0
 for ARG in "$@"; do
-  COUNT=$((COUNT + 1))
+  COUNT=`expr $COUNT + 1`
 
-  case "$ARG" in
-    *--help*)
-      echo ""
-      bash "$path_dir/progs/help.sh"
-      echo ""
-      ;;
-    *--type*)
-      echo ""
-      bash "$path_dir/progs/type.sh" "$@"
-      echo ""
-      ;;
-    *--docker-remove*)
-      echo ""
-      bash "$path_dir/progs/docker-remove.sh" "$@"
-      echo ""
-      ;;
-    *--docker-prune*)
-      echo ""
-      bash "$path_dir/progs/docker-prune.sh" "$@"
-      echo ""
-      ;;
-    *--start*)
-      echo ""
-      bash "$path_dir/progs/scoob-start.sh" "$@"
-      echo ""
-      ;;
-  esac
+  # Chama o help se passado o argumento --help!
+  if [[ "$ARG" == *--help* ]]; then
+    echo "";
+    bash $path_dir/progs/help.sh
+    echo "";
+  fi
+
+  # Chama a execução do tipo se passado o argumento --type!
+  if [[ "$ARG" == *--type* ]]; then
+    echo "";
+    bash $path_dir/progs/type.sh "$@"
+    echo "";
+  fi
+
+  # Chama a deleção de container e image se passado o argumento --docker-remove!
+  if [[ "$ARG" == *--docker-remove* ]]; then
+    echo "";
+    bash $path_dir/progs/docker-remove.sh "$@"
+    echo "";
+  fi
+
+  # Chama a deleção de container e image se passado o argumento --docker-remove!
+  if [[ "$ARG" == *--docker-prune* ]]; then
+    echo "";
+    bash $path_dir/progs/docker-prune.sh "$@"
+    echo "";
+  fi
+
+  # Chama a deleção de container e image se passado o argumento --docker-remove!
+    if [[ "$ARG" == *--start* ]]; then
+      echo "";
+      bash $path_dir/progs/scoob-start.sh "$@"
+      echo "";
+    fi
 done
+
+
+
