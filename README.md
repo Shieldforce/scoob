@@ -25,6 +25,7 @@ docker run --rm \
     -u "$(id -u):$(id -g)" \
     -v "$(pwd):/var/www/html" \
     -w /var/www/html composer/composer \
+     composer install --ignore-platform-reqs \
      composer require shieldforce/scoob
 ```
 ### Comando para rodar local:
