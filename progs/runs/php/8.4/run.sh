@@ -66,7 +66,7 @@ fi
 # verifica de o container existe e remove
 if docker ps -a --format '{{.Names}}' | grep -wq "${container}"; then
   echo "Removendo container existente..."
-  docker rm -f php-fpm-8.4-8099
+  docker rm -f ${container}
 fi
 
 if [[ "$continue" = "s" ]] || [[ "$continue" = "s" ]]; then
