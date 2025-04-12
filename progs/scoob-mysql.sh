@@ -28,6 +28,8 @@ mysql_pass="scoob_pass"
 mysql_db="scoob_db"
 mysql_container="scoob-mysql"
 mysql_network="scoob-network"
+mysql_character_server="utf8mb4"
+mysql_collation_server="utf8mb4_unicode_ci"
 mysql_version="latest"
 init_sql_path="${path_dir}/ini.sql"
 
@@ -54,6 +56,12 @@ for arg in "$@"; do
       ;;
     --network=*)
       mysql_network="${arg#*=}"
+      ;;
+    --character-set-server=*)
+      mysql_character_server="${arg#*=}"
+      ;;
+    --collation-server=*)
+      mysql_collation_server="${arg#*=}"
       ;;
     --version=*)
       mysql_version="${arg#*=}"
@@ -87,6 +95,8 @@ docker run -d --rm \
   -e MYSQL_PASSWORD="$mysql_pass" \
   -e MYSQL_DATABASE="$mysql_db" \
   --network "$mysql_network" \
+  --character-set-server="$mysql_character_server" \
+  --collation-server="$mysql_collation_server" \
   -v "$init_sql_path":/docker-entrypoint-initdb.d/init.sql \
   mysql:"$mysql_version"
 
