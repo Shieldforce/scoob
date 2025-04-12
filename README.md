@@ -47,7 +47,9 @@ bash ./vendor/shieldforce/scoob/scoob --type docker-php-nginx --version 8.3 --po
 
 ---
 
-### user scoob ou 'bash ./vendor/shieldforce/scoob/scoob' vai depender de como vc instalou!:
+### Rede que o scoob é criado scoob-network
+
+### Use scoob ou 'bash ./vendor/shieldforce/scoob/scoob' vai depender de como vc instalou!:
 
 ### Com o scoob instalado global ou localmente vc pode usar o composer dele:
 ```
