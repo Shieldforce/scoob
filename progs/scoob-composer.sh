@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "teste";
+
 if [ -v $2 ]; then
   bash ${path_dir}/progs/error.sh  "Você precisa passar a flag --composer";
   exit;
