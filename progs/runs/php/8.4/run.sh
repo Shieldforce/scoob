@@ -63,6 +63,12 @@ else
   echo "Rede scoob-network já existe."
 fi
 
+# verifica de o container existe e remove
+if docker ps -a --format '{{.Names}}' | grep -wq "${container}"; then
+  echo "Removendo container existente..."
+  docker rm -f php-fpm-8.4-8099
+fi
+
 if [[ "$continue" = "s" ]] || [[ "$continue" = "s" ]]; then
   bash ${path_dir}/progs/docker-remove.sh --docker-remove ${container}
   docker build \
