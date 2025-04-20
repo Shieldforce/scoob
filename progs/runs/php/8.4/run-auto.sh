@@ -18,10 +18,10 @@ NC='\033[0m'
 
 dir=scoob_implements/php/${4}
 
-if [ -d $dir ]; then
+if [ -d $dir > /dev/null 2>&1 ]; then
   bash ${path_dir}/progs/exec_spinner.sh \
       "" \
-      "Verificando diretório scoob_implements..."
+      "Verificando diretório scoob_implementss..."
 else
   if [ -d docker_scoob ]; then
     bash ${path_dir}/progs/exec_spinner.sh \
