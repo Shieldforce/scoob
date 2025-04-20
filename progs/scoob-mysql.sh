@@ -83,7 +83,7 @@ docker run -d --rm \
   --name "$mysql_container" \
   -p "$mysql_port":3306 \
   -e MYSQL_ROOT_PASSWORD="$mysql_root_pass" \
-  -e MYSQL_USER="$mysql_user" \
+  -e MYSQL_USER="$mysql_u ser" \
   -e MYSQL_PASSWORD="$mysql_pass" \
   -e MYSQL_DATABASE="$mysql_db" \
   --network "$mysql_network" \
