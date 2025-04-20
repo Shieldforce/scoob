@@ -80,28 +80,32 @@ fi
 
 # Gera o conteúdo do arquivo SQL
 cat > "$init_sql_path" <<EOF
-CREATE USER IF NOT EXISTS 'root'@'%' IDENTIFIED BY '${db_pass}';
+-- User root
+
+CREATE USER IF NOT EXISTS 'root'@'%' IDENTIFIED BY '${mysql_pass}';
 GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;
 
-CREATE USER IF NOT EXISTS 'root'@'%.%.%.%' IDENTIFIED BY '${db_pass}';
+CREATE USER IF NOT EXISTS 'root'@'%.%.%.%' IDENTIFIED BY '${mysql_pass}';
 GRANT ALL PRIVILEGES ON *.* TO 'root'@'%.%.%.%' WITH GRANT OPTION;
 
-CREATE USER IF NOT EXISTS 'root'@'0.0.0.0' IDENTIFIED BY '${db_pass}';
+CREATE USER IF NOT EXISTS 'root'@'0.0.0.0' IDENTIFIED BY '${mysql_pass}';
 GRANT ALL PRIVILEGES ON *.* TO 'root'@'0.0.0.0' WITH GRANT OPTION;
 
-CREATE USER IF NOT EXISTS 'root'@'localhost' IDENTIFIED BY '${db_pass}';
+CREATE USER IF NOT EXISTS 'root'@'localhost' IDENTIFIED BY '${mysql_pass}';
 GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' WITH GRANT OPTION;
 
-CREATE USER IF NOT EXISTS '${$mysql_user}'@'%' IDENTIFIED BY '${db_pass}';
+-- User criado
+
+CREATE USER IF NOT EXISTS '${$mysql_user}'@'%' IDENTIFIED BY '${mysql_pass}';
 GRANT ALL PRIVILEGES ON ${$mysql_db}.* TO '${$mysql_user}'@'%' WITH GRANT OPTION;
 
-CREATE USER IF NOT EXISTS '${$mysql_user}'@'%.%.%.%' IDENTIFIED BY '${db_pass}';
+CREATE USER IF NOT EXISTS '${$mysql_user}'@'%.%.%.%' IDENTIFIED BY '${mysql_pass}';
 GRANT ALL PRIVILEGES ON ${$mysql_db}.* TO '${$mysql_user}'@'%.%.%.%' WITH GRANT OPTION;
 
-CREATE USER IF NOT EXISTS '${$mysql_user}'@'0.0.0.0' IDENTIFIED BY '${db_pass}';
+CREATE USER IF NOT EXISTS '${$mysql_user}'@'0.0.0.0' IDENTIFIED BY '${mysql_pass}';
 GRANT ALL PRIVILEGES ON ${$mysql_db}.* TO '${$mysql_user}'@'0.0.0.0' WITH GRANT OPTION;
 
-CREATE USER IF NOT EXISTS '${$mysql_user}'@'localhost' IDENTIFIED BY '${db_pass}';
+CREATE USER IF NOT EXISTS '${$mysql_user}'@'localhost' IDENTIFIED BY '${mysql_pass}';
 GRANT ALL PRIVILEGES ON ${$mysql_db}.* TO '${$mysql_user}'@'localhost' WITH GRANT OPTION;
 
 FLUSH PRIVILEGES;
