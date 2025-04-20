@@ -99,6 +99,7 @@ bash ${path_dir}/progs/exec_spinner.sh \
        --name ${container} \
        --restart unless-stopped \
        --network scoob-network \
+       --network-alias "${container}-nginx" \
        -p "${port}:80" \
        -v $(pwd):/var/www \
        ${container}" \
