@@ -20,22 +20,22 @@ dir=scoob_implements/php/${4}
 
 if [ -d $dir ]; then
   bash ${path_dir}/progs/exec_spinner.sh \
-      "echo '-'" \
+      "echo '-'  > /dev/null 2>&1" \
       "Verificando diretório scoob_implements..."
 else
   if [ -d docker_scoob ]; then
     bash ${path_dir}/progs/exec_spinner.sh \
-        "echo '-'" \
+        "echo '-'  > /dev/null 2>&1" \
         "Verificando diretório scoob_implements..."
   else
     bash ${path_dir}/progs/exec_spinner.sh \
-        "mkdir scoob_implements" \
+        "mkdir scoob_implements > /dev/null 2>&1" \
         "Criando diretório scoob_implements..."
   fi
 
   if [ -d scoob_implements/php ]; then
     bash ${path_dir}/progs/exec_spinner.sh \
-        "echo '-'" \
+        "echo '-'  > /dev/null 2>&1" \
         "Verificando diretório scoob_implements..."
   else
     cd scoob_implements && mkdir php
@@ -67,17 +67,16 @@ continue="S"
 # Verifica se a rede scoob-network já existe
 if ! docker network ls | grep -q "scoob-network"; then
   bash ${path_dir}/progs/exec_spinner.sh \
-      "docker network create scoob-network" \
+      "docker network create scoob-network > /dev/null 2>&1" \
       "Criando rede scoob-network..."
 else
   bash ${path_dir}/progs/exec_spinner.sh \
-        "echo ''" \
+        "echo '-' > /dev/null 2>&1" \
         "Validando rede scoob-network..."
 fi
 
 # verifica de o container existe e remove
 if docker ps -a --format '{{.Names}}' | grep -wq "${container}"; then
-  echo "Removendo container existente..."
   docker rm -f ${container}
 fi
 
@@ -90,7 +89,7 @@ bash ${path_dir}/progs/exec_spinner.sh \
            --build-arg PATH_DIR=${dir} \
            --build-arg PATH_COR=$(pwd) \
            --build-arg VERSION=${4} \
-           -f "${dir}/Dockerfile" ." \
+           -f "${dir}/Dockerfile" . > /dev/null 2>&1" \
         "Construindo container ${container}..."
 
 bash ${path_dir}/progs/exec_spinner.sh \
@@ -101,12 +100,12 @@ bash ${path_dir}/progs/exec_spinner.sh \
            --network scoob-network \
            -p "${port}:80" \
            -v $(pwd):/var/www \
-           ${container}" \
+           ${container} > /dev/null 2>&1" \
         "Rodando container ${container}..."
 
 if docker ps | grep "$container" &> /dev/null; then
     bash ${path_dir}/progs/exec_spinner.sh \
-            "bash ${dir}/commands-auto.sh ${container} ${$@}" \
+            "bash ${dir}/commands-auto.sh ${container} $@ > /dev/null 2>&1" \
             "Rodando últimos comandos..."
 else
     echo -e "${RED}❌ Erro ao criar container!!${NC}"
