@@ -76,7 +76,7 @@ else
 fi
 
 # verifica de o container existe e remove
-if docker ps -a --format '{{.Names}}' | grep -wq "${container} > /dev/null 2>&1"; then
+if docker ps -a --format '{{.Names}}' | grep -wq "${container}" > /dev/null 2>&1; then
   docker rm -f ${container}
 fi
 
@@ -92,14 +92,16 @@ bash ${path_dir}/progs/exec_spinner.sh \
            -f "${dir}/Dockerfile" ." \
         "Construindo container ${container}..."
 
-docker run \
-       -d \
-       --name ${container} \
-       --restart unless-stopped \
-       --network scoob-network \
-       -p "${port}:80" \
-       -v $(pwd):/var/www \
-       ${container}
+bash ${path_dir}/progs/exec_spinner.sh \
+        "docker run \
+           -d \
+           --name ${container} \
+           --restart unless-stopped \
+           --network scoob-network \
+           -p "${port}:80" \
+           -v $(pwd):/var/www \
+           ${container}" \
+        "Rodando container ${container}..."
 
 if docker ps | grep "$container" &> /dev/null; then
     bash ${path_dir}/progs/exec_spinner.sh \
