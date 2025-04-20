@@ -18,12 +18,12 @@ NC='\033[0m'
 
 dir=scoob_implements/php/${4}
 
-if [ -d $dir ]; then
+if [ -d $dir ] > /dev/null 2>&1; then
   bash ${path_dir}/progs/exec_spinner.sh \
       "" \
       "Verificando diretório scoob_implements..."
 else
-  if [ -d docker_scoob ]; then
+  if [ -d docker_scoob ] > /dev/null 2>&1; then
     bash ${path_dir}/progs/exec_spinner.sh \
         "" \
         "Verificando diretório scoob_implements..."
@@ -33,12 +33,12 @@ else
         "Criando diretório scoob_implements..."
   fi
 
-  if [ -d scoob_implements/php ]; then
+  if [ -d scoob_implements/php ] > /dev/null 2>&1; then
     bash ${path_dir}/progs/exec_spinner.sh \
         "" \
         "Verificando diretório scoob_implements..."
   else
-    cd scoob_implements && mkdir php
+    cd scoob_implements && mkdir php > /dev/null 2>&1
     cd ..
   fi
 
@@ -65,7 +65,7 @@ echo "";
 continue="S"
 
 # Verifica se a rede scoob-network já existe
-if ! docker network ls | grep -q "scoob-network"; then
+if ! docker network ls | grep -q "scoob-network > /dev/null 2>&1"; then
   bash ${path_dir}/progs/exec_spinner.sh \
       "docker network create scoob-network > /dev/null 2>&1" \
       "Criando rede scoob-network..."
@@ -76,9 +76,9 @@ else
 fi
 
 # verifica de o container existe e remove
-# if docker ps -a --format '{{.Names}}' | grep -wq "${container}"; then
-#   docker rm -f ${container}
-# fi
+if docker ps -a --format '{{.Names}}' | grep -wq "${container} > /dev/null 2>&1"; then
+  docker rm -f ${container}
+fi
 
 # bash ${path_dir}/progs/docker-remove.sh --docker-remove ${container}
 
