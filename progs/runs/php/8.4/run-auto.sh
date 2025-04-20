@@ -104,9 +104,7 @@ bash ${path_dir}/progs/exec_spinner.sh \
     "Rodando container ${container}..."
 
 if docker ps | grep "$container"; then
-    bash ${path_dir}/progs/exec_spinner.sh \
-        "bash ${dir}/commands-auto.sh ${container} $@ > /dev/null 2>&1" \
-        "Rodando últimos comandos..."
+    bash ${dir}/commands-auto.sh ${container} $@
 else
     echo -e "${RED}❌ Erro ao criar container!!${NC}"
 fi
