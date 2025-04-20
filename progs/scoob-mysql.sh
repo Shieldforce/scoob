@@ -97,16 +97,16 @@ GRANT ALL PRIVILEGES ON *.* TO 'scoob_user'@'localhost' WITH GRANT OPTION;
 -- User default
 
 CREATE USER IF NOT EXISTS 'scoob_user'@'%' IDENTIFIED BY '${db_pass}';
-GRANT ALL PRIVILEGES ON *.* TO 'scoob_user'@'%' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON scoob_db.* TO 'scoob_user'@'%' WITH GRANT OPTION;
 
 CREATE USER IF NOT EXISTS 'scoob_user'@'%.%.%.%' IDENTIFIED BY '${db_pass}';
-GRANT ALL PRIVILEGES ON *.* TO 'scoob_user'@'%.%.%.%' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON scoob_db.* TO 'scoob_user'@'%.%.%.%' WITH GRANT OPTION;
 
 CREATE USER IF NOT EXISTS 'scoob_user'@'0.0.0.0' IDENTIFIED BY '${db_pass}';
-GRANT ALL PRIVILEGES ON *.* TO 'scoob_user'@'0.0.0.0' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON scoob_db.* TO 'scoob_user'@'0.0.0.0' WITH GRANT OPTION;
 
 CREATE USER IF NOT EXISTS 'scoob_user'@'localhost' IDENTIFIED BY '${db_pass}';
-GRANT ALL PRIVILEGES ON *.* TO 'scoob_user'@'localhost' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON scoob_db.* TO 'scoob_user'@'localhost' WITH GRANT OPTION;
 
 FLUSH PRIVILEGES;
 EOF

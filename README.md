@@ -80,6 +80,7 @@ scoob --docker-prune
 ---
 
 ### Roda um servidor mysql na rede scoob-network (se rodar: scoob --mysql-ext ele roda com os parâmetros defaults):
+### Usuário root tem todos os privilégios! E utiliza a mesma senha --pass='password'
 #### Dados Default:
 - port: 3399
 - user: scoob_user
