@@ -18,7 +18,7 @@ else
   if [ -d docker_scoob ]; then
     echo "Diretório scoob_implements ok!"
   else
-    ./progs/exec_spinner.sh \
+    bash ${path_dir}/progs/exec_spinner.sh \
         "mkdir scoob_implements" \
         "Criando diretório scoob_implements..."
   fi
