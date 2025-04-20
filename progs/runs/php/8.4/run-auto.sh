@@ -18,10 +18,10 @@ NC='\033[0m'
 
 dir=scoob_implements/php/${4}
 
-if [ -d $dir > /dev/null 2>&1 ]; then
+if [ -d $dir ]; then
   bash ${path_dir}/progs/exec_spinner.sh \
       "" \
-      "Verificando diretório scoob_implementss..."
+      "Verificando diretório scoob_implements..."
 else
   if [ -d docker_scoob ]; then
     bash ${path_dir}/progs/exec_spinner.sh \
@@ -89,7 +89,7 @@ bash ${path_dir}/progs/exec_spinner.sh \
            --build-arg PATH_DIR=${dir} \
            --build-arg PATH_COR=$(pwd) \
            --build-arg VERSION=${4} \
-           -f "${dir}/Dockerfile" . > /dev/null 2>&1" \
+           -f "${dir}/Dockerfile" ." \
         "Construindo container ${container}..."
 
 bash ${path_dir}/progs/exec_spinner.sh \
@@ -100,7 +100,7 @@ bash ${path_dir}/progs/exec_spinner.sh \
            --network scoob-network \
            -p "${port}:80" \
            -v $(pwd):/var/www \
-           ${container} > /dev/null 2>&1" \
+           ${container}" \
         "Rodando container ${container}..."
 
 if docker ps | grep "$container" &> /dev/null; then
