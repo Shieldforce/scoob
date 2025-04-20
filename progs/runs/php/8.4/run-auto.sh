@@ -14,9 +14,15 @@ dir=scoob_implements/php/${4}
 
 if [ -d $dir ]; then
   echo "Diretório scoob_implements ok!"
+  bash ${path_dir}/progs/exec_spinner.sh \
+      "echo '-'" \
+      "Verificando diretório scoob_implements..."
 else
   if [ -d docker_scoob ]; then
     echo "Diretório scoob_implements ok!"
+    bash ${path_dir}/progs/exec_spinner.sh \
+        "echo '-'" \
+        "Verificando diretório scoob_implements..."
   else
     bash ${path_dir}/progs/exec_spinner.sh \
         "mkdir scoob_implements" \
@@ -25,6 +31,9 @@ else
 
   if [ -d scoob_implements/php ]; then
     echo "Diretório php ok!"
+    bash ${path_dir}/progs/exec_spinner.sh \
+        "echo '-'" \
+        "Verificando diretório scoob_implements..."
   else
     cd scoob_implements && mkdir php
     cd ..
