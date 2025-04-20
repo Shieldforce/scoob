@@ -20,12 +20,12 @@ dir=scoob_implements/php/${4}
 
 if [ -d $dir ]; then
   bash ${path_dir}/progs/exec_spinner.sh \
-      "echo '-'  > /dev/null 2>&1" \
+      "" \
       "Verificando diretório scoob_implements..."
 else
   if [ -d docker_scoob ]; then
     bash ${path_dir}/progs/exec_spinner.sh \
-        "echo '-'  > /dev/null 2>&1" \
+        "" \
         "Verificando diretório scoob_implements..."
   else
     bash ${path_dir}/progs/exec_spinner.sh \
@@ -35,7 +35,7 @@ else
 
   if [ -d scoob_implements/php ]; then
     bash ${path_dir}/progs/exec_spinner.sh \
-        "echo '-'  > /dev/null 2>&1" \
+        "" \
         "Verificando diretório scoob_implements..."
   else
     cd scoob_implements && mkdir php
@@ -71,7 +71,7 @@ if ! docker network ls | grep -q "scoob-network"; then
       "Criando rede scoob-network..."
 else
   bash ${path_dir}/progs/exec_spinner.sh \
-        "echo '-' > /dev/null 2>&1" \
+        "" \
         "Validando rede scoob-network..."
 fi
 
