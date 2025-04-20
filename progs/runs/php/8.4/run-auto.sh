@@ -92,16 +92,14 @@ bash ${path_dir}/progs/exec_spinner.sh \
            -f "${dir}/Dockerfile" ." \
         "Construindo container ${container}..."
 
-bash ${path_dir}/progs/exec_spinner.sh \
-        "docker run \
-           -d \
-           --name ${container} \
-           --restart unless-stopped \
-           --network scoob-network \
-           -p "${port}:80" \
-           -v $(pwd):/var/www \
-           ${container}" \
-        "Rodando container ${container}..."
+docker run \
+       -d \
+       --name ${container} \
+       --restart unless-stopped \
+       --network scoob-network \
+       -p "${port}:80" \
+       -v $(pwd):/var/www \
+       ${container}
 
 if docker ps | grep "$container" &> /dev/null; then
     bash ${path_dir}/progs/exec_spinner.sh \
