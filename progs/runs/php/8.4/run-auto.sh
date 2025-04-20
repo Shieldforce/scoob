@@ -108,5 +108,5 @@ if docker ps | grep "$container" &> /dev/null; then
         "bash ${dir}/commands-auto.sh ${container} $@ > /dev/null 2>&1" \
         "Rodando últimos comandos..."
 else
-    echo -e "${RED}❌ Erro ao criar container!!${NC}"
+    echo -e "${RED}❌ 2Erro ao criar container!!${NC}"
 fi
