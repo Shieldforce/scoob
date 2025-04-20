@@ -78,6 +78,39 @@ if docker ps -a --format '{{.Names}}' | grep -wq "$mysql_container"; then
   docker rm -f "$mysql_container"
 fi
 
+# Gera o conteúdo do arquivo SQL
+cat > "$init_sql_path" <<EOF
+-- User root
+
+CREATE USER IF NOT EXISTS 'root'@'%' IDENTIFIED BY '${db_pass}';
+GRANT ALL PRIVILEGES ON *.* TO 'scoob_user'@'%' WITH GRANT OPTION;
+
+CREATE USER IF NOT EXISTS 'root'@'%.%.%.%' IDENTIFIED BY '${db_pass}';
+GRANT ALL PRIVILEGES ON *.* TO 'scoob_user'@'%.%.%.%' WITH GRANT OPTION;
+
+CREATE USER IF NOT EXISTS 'root'@'0.0.0.0' IDENTIFIED BY '${db_pass}';
+GRANT ALL PRIVILEGES ON *.* TO 'scoob_user'@'0.0.0.0' WITH GRANT OPTION;
+
+CREATE USER IF NOT EXISTS 'root'@'localhost' IDENTIFIED BY '${db_pass}';
+GRANT ALL PRIVILEGES ON *.* TO 'scoob_user'@'localhost' WITH GRANT OPTION;
+
+-- User default
+
+CREATE USER IF NOT EXISTS 'scoob_user'@'%' IDENTIFIED BY '${db_pass}';
+GRANT ALL PRIVILEGES ON *.* TO 'scoob_user'@'%' WITH GRANT OPTION;
+
+CREATE USER IF NOT EXISTS 'scoob_user'@'%.%.%.%' IDENTIFIED BY '${db_pass}';
+GRANT ALL PRIVILEGES ON *.* TO 'scoob_user'@'%.%.%.%' WITH GRANT OPTION;
+
+CREATE USER IF NOT EXISTS 'scoob_user'@'0.0.0.0' IDENTIFIED BY '${db_pass}';
+GRANT ALL PRIVILEGES ON *.* TO 'scoob_user'@'0.0.0.0' WITH GRANT OPTION;
+
+CREATE USER IF NOT EXISTS 'scoob_user'@'localhost' IDENTIFIED BY '${db_pass}';
+GRANT ALL PRIVILEGES ON *.* TO 'scoob_user'@'localhost' WITH GRANT OPTION;
+
+FLUSH PRIVILEGES;
+EOF
+
 # Sobe o container MySQL
 docker run -d --rm \
   --name "$mysql_container" \
