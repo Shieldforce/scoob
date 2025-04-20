@@ -80,8 +80,6 @@ fi
 
 # Gera o conteúdo do arquivo SQL
 cat > "$init_sql_path" <<EOF
--- User root
-
 CREATE USER IF NOT EXISTS 'root'@'%' IDENTIFIED BY '${db_pass}';
 GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;
 
@@ -93,8 +91,6 @@ GRANT ALL PRIVILEGES ON *.* TO 'root'@'0.0.0.0' WITH GRANT OPTION;
 
 CREATE USER IF NOT EXISTS 'root'@'localhost' IDENTIFIED BY '${db_pass}';
 GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' WITH GRANT OPTION;
-
--- User default
 
 CREATE USER IF NOT EXISTS '${$mysql_user}'@'%' IDENTIFIED BY '${db_pass}';
 GRANT ALL PRIVILEGES ON ${$mysql_db}.* TO '${$mysql_user}'@'%' WITH GRANT OPTION;
