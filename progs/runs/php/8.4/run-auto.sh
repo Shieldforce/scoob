@@ -56,6 +56,7 @@ cp -R ${path_dir}/progs/runs/php/${4}/php $dir
 cp -R ${path_dir}/progs/runs/php/${4}/supervisord $dir
 cp ${path_dir}/progs/runs/php/${4}/Dockerfile $dir
 cp ${path_dir}/progs/runs/php/${4}/commands.sh $dir
+cp ${path_dir}/progs/runs/php/${4}/commands-auto.sh $dir
 
 chmod 777 $dir
 
@@ -104,7 +105,9 @@ bash ${path_dir}/progs/exec_spinner.sh \
     "Rodando container ${container}..."
 
 if docker ps | grep "$container"; then
-    bash ${dir}/commands-auto.sh ${container} $@
+    bash ${path_dir}/progs/exec_spinner.sh \
+        "bash ${dir}/commands-auto.sh ${container} $@ > /dev/null 2>&1" \
+        "Rodando últimos comandos..."
 else
     echo -e "${RED}❌ Erro ao criar container!!${NC}"
 fi
