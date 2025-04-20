@@ -8,6 +8,12 @@ fi
 
 container="php-fpm-${4}-${port}"
 
+# Cores
+GREEN='\033[0;32m'
+RED='\033[0;31m'
+YELLOW='\033[1;33m'
+NC='\033[0m'
+
 # -----------------------------------------------------------
 
 dir=scoob_implements/php/${4}
@@ -99,15 +105,11 @@ bash ${path_dir}/progs/exec_spinner.sh \
         "Rodando container ${container}..."
 
 if docker ps | grep "$container" &> /dev/null; then
-    echo "";
-    echo -e "\e[33;32m Container criado com sucesso! \e[0m";
-    echo "";
-    echo -e "\e[33;36m $(docker ps | grep ${container}) \e[0m";
-    echo "";
-    bash ${path_dir}/progs/success.sh 'Rodando comandos da implementação!'
-    bash ${dir}/commands.sh ${container} "$@"
+    bash ${path_dir}/progs/exec_spinner.sh \
+            "bash ${dir}/commands-auto.sh ${container} ${$@}" \
+            "Rodando últimos comandos..."
 else
-    bash ${path_dir}/progs/error.sh 'Erro ao criar container!'
+    echo -e "${RED}❌ Erro ao criar container!!${NC}"
 fi
 
 
