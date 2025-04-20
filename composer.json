@@ -14,6 +14,9 @@
             "email": "shieldforce2@gmail.com"
         }
     ],
-    "minimum-stability": "stable",
-    "require": {}
+    "require": {
+        "shieldforce/scoob-eco": "dev-main"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
