@@ -76,9 +76,9 @@ else
 fi
 
 # verifica de o container existe e remove
-if docker ps -a --format '{{.Names}}' | grep -wq "${container}"; then
-  docker rm -f ${container}
-fi
+# if docker ps -a --format '{{.Names}}' | grep -wq "${container}"; then
+#   docker rm -f ${container}
+# fi
 
 # bash ${path_dir}/progs/docker-remove.sh --docker-remove ${container}
 
