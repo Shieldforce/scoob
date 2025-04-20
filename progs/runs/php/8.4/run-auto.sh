@@ -48,11 +48,6 @@ chmod 777 $dir
 # -----------------------------------------------------------
 
 echo "";
-bash ${path_dir}/progs/question.sh "
- É opcional, mas se preferir configurar os arquivos dos serviços,
- eles estão na pasta que acabou de ser criada na raiz do seu projeto : ($(pwd)/${dir}),
- para subir o container baseado nas suas configurações tecle S só depois de
- configurar os arquivos dos serviços!"
 continue="S"
 
 # Verifica se a rede scoob-network já existe
@@ -69,24 +64,26 @@ if docker ps -a --format '{{.Names}}' | grep -wq "${container}"; then
   docker rm -f ${container}
 fi
 
-if [[ "$continue" = "s" ]] || [[ "$continue" = "s" ]]; then
-  bash ${path_dir}/progs/docker-remove.sh --docker-remove ${container}
-  docker build \
-              -t ${container} \
-              --build-arg EXPOSE_PORT=${port} \
-              --build-arg PATH_DIR=${dir} \
-              --build-arg PATH_COR=$(pwd) \
-              --build-arg VERSION=${4} \
-              -f "${dir}/Dockerfile" .
-  docker run \
-              -d \
-              --name ${container} \
-              --restart unless-stopped \
-              --network scoob-network \
-              -p "${port}:80" \
-              -v $(pwd):/var/www \
-              ${container}
-  if docker ps | grep "$container" &> /dev/null; then
+# bash ${path_dir}/progs/docker-remove.sh --docker-remove ${container}
+
+docker build \
+          -t ${container} \
+          --build-arg EXPOSE_PORT=${port} \
+          --build-arg PATH_DIR=${dir} \
+          --build-arg PATH_COR=$(pwd) \
+          --build-arg VERSION=${4} \
+          -f "${dir}/Dockerfile" .
+
+docker run \
+          -d \
+          --name ${container} \
+          --restart unless-stopped \
+          --network scoob-network \
+          -p "${port}:80" \
+          -v $(pwd):/var/www \
+          ${container}
+
+if docker ps | grep "$container" &> /dev/null; then
     echo "";
     echo -e "\e[33;32m Container criado com sucesso! \e[0m";
     echo "";
@@ -94,12 +91,8 @@ if [[ "$continue" = "s" ]] || [[ "$continue" = "s" ]]; then
     echo "";
     bash ${path_dir}/progs/success.sh 'Rodando comandos da implementação!'
     bash ${dir}/commands.sh ${container} "$@"
-  else
-    bash ${path_dir}/progs/error.sh 'Erro ao criar container!'
-  fi
 else
-  echo "Você decidiu não continuar...!";
-  exit;
+    bash ${path_dir}/progs/error.sh 'Erro ao criar container!'
 fi
 
 
