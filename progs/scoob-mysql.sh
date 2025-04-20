@@ -120,6 +120,7 @@ docker run -d --rm \
   -e MYSQL_PASSWORD="$mysql_pass" \
   -e MYSQL_DATABASE="$mysql_db" \
   --network "$mysql_network" \
+  --network-alias "${mysql_container}-mysql" \
   -v "$init_sql_path":/docker-entrypoint-initdb.d/init.sql \
   -v "${mysql_container}_data":/var/lib/mysql \
   mysql:"$mysql_version"
