@@ -18,12 +18,12 @@ NC='\033[0m'
 
 dir=scoob_implements/php/${4}
 
-if [ -d $dir ] > /dev/null 2>&1; then
+if [ -d $dir ]; then
   bash ${path_dir}/progs/exec_spinner.sh \
       "" \
       "Verificando diretório scoob_implements..."
 else
-  if [ -d docker_scoob ] > /dev/null 2>&1; then
+  if [ -d docker_scoob ]; then
     bash ${path_dir}/progs/exec_spinner.sh \
         "" \
         "Verificando diretório scoob_implements..."
@@ -33,12 +33,12 @@ else
         "Criando diretório scoob_implements..."
   fi
 
-  if [ -d scoob_implements/php ] > /dev/null 2>&1; then
+  if [ -d scoob_implements/php ]; then
     bash ${path_dir}/progs/exec_spinner.sh \
         "" \
         "Verificando diretório scoob_implements..."
   else
-    cd scoob_implements && mkdir php > /dev/null 2>&1
+    cd scoob_implements && mkdir php
     cd ..
   fi
 
@@ -65,7 +65,7 @@ echo "";
 continue="S"
 
 # Verifica se a rede scoob-network já existe
-if ! docker network ls | grep -q "scoob-network > /dev/null 2>&1"; then
+if ! docker network ls | grep -q "scoob-network" > /dev/null 2>&1; then
   bash ${path_dir}/progs/exec_spinner.sh \
       "docker network create scoob-network > /dev/null 2>&1" \
       "Criando rede scoob-network..."
