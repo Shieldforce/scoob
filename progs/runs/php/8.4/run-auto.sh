@@ -71,8 +71,8 @@ if ! docker network ls | grep -q "scoob-network" > /dev/null 2>&1; then
       "Criando rede scoob-network..."
 else
   bash ${path_dir}/progs/exec_spinner.sh \
-        "" \
-        "Validando rede scoob-network..."
+      "" \
+      "Validando rede scoob-network..."
 fi
 
 # verifica de o container existe e remove
@@ -83,32 +83,30 @@ fi
 # bash ${path_dir}/progs/docker-remove.sh --docker-remove ${container}
 
 bash ${path_dir}/progs/exec_spinner.sh \
-        "docker build \
-           -t ${container} \
-           --build-arg EXPOSE_PORT=${port} \
-           --build-arg PATH_DIR=${dir} \
-           --build-arg PATH_COR=$(pwd) \
-           --build-arg VERSION=${4} \
-           -f "${dir}/Dockerfile" ." \
-        "Construindo container ${container}..."
+    "docker build \
+       -t ${container} \
+       --build-arg EXPOSE_PORT=${port} \
+       --build-arg PATH_DIR=${dir} \
+       --build-arg PATH_COR=$(pwd) \
+       --build-arg VERSION=${4} \
+       -f "${dir}/Dockerfile" ." \
+    "Construindo container ${container}..."
 
 bash ${path_dir}/progs/exec_spinner.sh \
-        "docker run \
-           -d \
-           --name ${container} \
-           --restart unless-stopped \
-           --network scoob-network \
-           -p "${port}:80" \
-           -v $(pwd):/var/www \
-           ${container}" \
-        "Rodando container ${container}..."
+    "docker run \
+       -d \
+       --name ${container} \
+       --restart unless-stopped \
+       --network scoob-network \
+       -p "${port}:80" \
+       -v $(pwd):/var/www \
+       ${container}" \
+    "Rodando container ${container}..."
 
 if docker ps | grep "$container" &> /dev/null; then
     bash ${path_dir}/progs/exec_spinner.sh \
-            "bash ${dir}/commands-auto.sh ${container} $@ > /dev/null 2>&1" \
-            "Rodando últimos comandos..."
+        "bash ${dir}/commands-auto.sh ${container} $@ > /dev/null 2>&1" \
+        "Rodando últimos comandos..."
 else
     echo -e "${RED}❌ Erro ao criar container!!${NC}"
 fi
-
-
