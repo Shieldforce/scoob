@@ -13,13 +13,11 @@ container="php-fpm-${4}-${port}"
 dir=scoob_implements/php/${4}
 
 if [ -d $dir ]; then
-  echo "Diretório scoob_implements ok!"
   bash ${path_dir}/progs/exec_spinner.sh \
       "echo '-'" \
       "Verificando diretório scoob_implements..."
 else
   if [ -d docker_scoob ]; then
-    echo "Diretório scoob_implements ok!"
     bash ${path_dir}/progs/exec_spinner.sh \
         "echo '-'" \
         "Verificando diretório scoob_implements..."
@@ -30,7 +28,6 @@ else
   fi
 
   if [ -d scoob_implements/php ]; then
-    echo "Diretório php ok!"
     bash ${path_dir}/progs/exec_spinner.sh \
         "echo '-'" \
         "Verificando diretório scoob_implements..."
@@ -63,10 +60,13 @@ continue="S"
 
 # Verifica se a rede scoob-network já existe
 if ! docker network ls | grep -q "scoob-network"; then
-  echo "Criando rede scoob-network..."
-  docker network create scoob-network
+  bash ${path_dir}/progs/exec_spinner.sh \
+      "docker network create scoob-network" \
+      "Criando rede scoob-network..."
 else
-  echo "Rede scoob-network já existe."
+  bash ${path_dir}/progs/exec_spinner.sh \
+        "echo ''" \
+        "Validando rede scoob-network..."
 fi
 
 # verifica de o container existe e remove
@@ -77,22 +77,26 @@ fi
 
 # bash ${path_dir}/progs/docker-remove.sh --docker-remove ${container}
 
-docker build \
-          -t ${container} \
-          --build-arg EXPOSE_PORT=${port} \
-          --build-arg PATH_DIR=${dir} \
-          --build-arg PATH_COR=$(pwd) \
-          --build-arg VERSION=${4} \
-          -f "${dir}/Dockerfile" .
+bash ${path_dir}/progs/exec_spinner.sh \
+        "docker build \
+           -t ${container} \
+           --build-arg EXPOSE_PORT=${port} \
+           --build-arg PATH_DIR=${dir} \
+           --build-arg PATH_COR=$(pwd) \
+           --build-arg VERSION=${4} \
+           -f "${dir}/Dockerfile" ." \
+        "Construindo container ${container}..."
 
-docker run \
-          -d \
-          --name ${container} \
-          --restart unless-stopped \
-          --network scoob-network \
-          -p "${port}:80" \
-          -v $(pwd):/var/www \
-          ${container}
+bash ${path_dir}/progs/exec_spinner.sh \
+        "docker run \
+           -d \
+           --name ${container} \
+           --restart unless-stopped \
+           --network scoob-network \
+           -p "${port}:80" \
+           -v $(pwd):/var/www \
+           ${container}" \
+        "Rodando container ${container}..."
 
 if docker ps | grep "$container" &> /dev/null; then
     echo "";
