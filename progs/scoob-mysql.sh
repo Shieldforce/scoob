@@ -111,6 +111,23 @@ GRANT ALL PRIVILEGES ON *.* TO '$mysql_user'@'localhost' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
 EOF
 
+echo "$mysql_container"
+echo ""
+echo "$mysql_port"
+echo ""
+echo "$mysql_pass"
+echo ""
+echo "$mysql_user"
+echo ""
+echo "$mysql_pass"
+echo ""
+echo "$mysql_db"
+echo ""
+echo "$mysql_network"
+echo ""
+echo "$mysql_container"
+echo ""
+
 # Sobe o container MySQL
 docker run -d --rm \
   --name "$mysql_container" \
