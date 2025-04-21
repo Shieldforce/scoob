@@ -79,7 +79,7 @@ if docker ps -a --format '{{.Names}}' | grep -wq "$mysql_container"; then
 fi
 
 # Gera o conteúdo do arquivo SQL
-echo "
+cat > "$init_sql_path" <<EOF
 -- User root
 
 CREATE USER IF NOT EXISTS 'root'@'%' IDENTIFIED BY '$mysql_pass';
@@ -109,7 +109,7 @@ CREATE USER IF NOT EXISTS '$mysql_user'@'localhost' IDENTIFIED BY '$mysql_pass';
 GRANT ALL PRIVILEGES ON *.* TO '$mysql_user'@'localhost' WITH GRANT OPTION;
 
 FLUSH PRIVILEGES;
-" > $init_sql_path
+EOF
 
 # Sobe o container MySQL
 docker run -d --rm \
@@ -122,7 +122,7 @@ docker run -d --rm \
   --network "$mysql_network" \
   --network-alias "${mysql_container}-mysql" \
   -v "$init_sql_path":/docker-entrypoint-initdb.d/init.sql \
-  -v "${mysql_container}_data":/var/lib/mysql \
+  #-v "${mysql_container}_data":/var/lib/mysql \
   mysql:"$mysql_version"
 
 echo ''
