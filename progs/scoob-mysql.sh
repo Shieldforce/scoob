@@ -97,16 +97,16 @@ GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' WITH GRANT OPTION;
 -- User criado
 
 CREATE USER IF NOT EXISTS '$mysql_user'@'%' IDENTIFIED BY '$mysql_pass';
-GRANT ALL PRIVILEGES ON '$mysql_db'.* TO '$mysql_user'@'%' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON *.* TO '$mysql_user'@'%' WITH GRANT OPTION;
 
 CREATE USER IF NOT EXISTS '$mysql_user'@'%.%.%.%' IDENTIFIED BY '$mysql_pass';
-GRANT ALL PRIVILEGES ON '$mysql_db'.* TO '$mysql_user'@'%.%.%.%' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON *.* TO '$mysql_user'@'%.%.%.%' WITH GRANT OPTION;
 
 CREATE USER IF NOT EXISTS '$mysql_user'@'0.0.0.0' IDENTIFIED BY '$mysql_pass';
-GRANT ALL PRIVILEGES ON '$mysql_db'.* TO '$mysql_user'@'0.0.0.0' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON *.* TO '$mysql_user'@'0.0.0.0' WITH GRANT OPTION;
 
 CREATE USER IF NOT EXISTS '$mysql_user'@'localhost' IDENTIFIED BY '$mysql_pass';
-GRANT ALL PRIVILEGES ON '$mysql_db'.* TO '$mysql_user'@'localhost' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON *.* TO '$mysql_user'@'localhost' WITH GRANT OPTION;
 
 FLUSH PRIVILEGES;
 EOF
@@ -115,7 +115,7 @@ EOF
 docker run -d --rm \
   --name "$mysql_container" \
   -p "$mysql_port":3306 \
-  -e MYSQL_ROOT_PASSWORD="$mysql_root_pass" \
+  -e MYSQL_ROOT_PASSWORD="$mysql_pass" \
   -e MYSQL_USER="$mysql_user" \
   -e MYSQL_PASSWORD="$mysql_pass" \
   -e MYSQL_DATABASE="$mysql_db" \
