@@ -7,11 +7,8 @@ ARG APP_DIR=/var/www
 
 WORKDIR $APP_DIR
 
-RUN chmod 755 -R * && chown -R www-data: *
-
-# Instala pacotes do sistema
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
+# Instala pacotes do sistema e dependências necessárias para SQL Server
+RUN apt-get update && apt-get install -y --no-install-recommends \
     apt-utils \
     supervisor \
     zlib1g-dev \
@@ -21,24 +18,37 @@ RUN apt-get update && \
     libpq-dev \
     libxml2-dev \
     nginx \
-    gnupg2 unixodbc-dev gcc g++ make autoconf libc-dev pkg-config curl lsb-release apt-transport-https
+    gnupg2 \
+    unixodbc-dev \
+    gcc \
+    g++ \
+    make \
+    autoconf \
+    libc-dev \
+    pkg-config \
+    curl \
+    lsb-release \
+    apt-transport-https \
+    libssl-dev
 
-# Instala ODBC e drivers SQL Server
+# Adiciona repositório da Microsoft e instala ODBC
 RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - && \
     curl https://packages.microsoft.com/config/debian/$(lsb_release -rs)/prod.list > /etc/apt/sources.list.d/mssql-release.list && \
-    apt-get update && ACCEPT_EULA=Y apt-get install -y msodbcsql17 && \
-    pecl install sqlsrv pdo_sqlsrv && \
-    echo "extension=sqlsrv.so" > /usr/local/etc/php/conf.d/sqlsrv.ini && \
-    echo "extension=pdo_sqlsrv.so" > /usr/local/etc/php/conf.d/pdo_sqlsrv.ini
+    apt-get update && ACCEPT_EULA=Y apt-get install -y msodbcsql17
 
-# Composer
+# Instala os drivers SQL Server via PECL
+RUN pecl install pdo_sqlsrv sqlsrv && \
+    echo "extension=pdo_sqlsrv.so" > /usr/local/etc/php/conf.d/pdo_sqlsrv.ini && \
+    echo "extension=sqlsrv.so" > /usr/local/etc/php/conf.d/sqlsrv.ini
+
+# Instala Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Node.js e Yarn
+# Instala Node.js e Yarn
 RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
     apt-get install -y nodejs && npm install -g yarn
 
-# PHP Extensions
+# Instala extensões PHP
 RUN docker-php-ext-install zip iconv simplexml pcntl gd fileinfo \
     mysqli pdo pdo_mysql pdo_pgsql pgsql session xml intl bcmath
 
@@ -49,6 +59,7 @@ COPY ${PATH_DIR}/php/php.ini /usr/local/etc/php/php.ini
 COPY ${PATH_DIR}/nginx/nginx.conf /etc/nginx/nginx.conf
 COPY ${PATH_DIR}/nginx/sites /etc/nginx/sites-available
 
+# Limpa cache do apt
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 EXPOSE ${EXPOSE_PORT}
