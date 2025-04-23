@@ -80,6 +80,6 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 EXPOSE ${EXPOSE_PORT}
 
 # finish dockerfile
-ADD ${PATH_DIR}/supervisord/supervisord.conf /etc/supervisor/supervisord.conf
-ADD ${PATH_DIR}/supervisord/conf /etc/supervisord.d/
-CMD ["supervisord", "-n"]
+#ADD ${PATH_DIR}/supervisord/supervisord.conf /etc/supervisor/supervisord.conf
+#ADD ${PATH_DIR}/supervisord/conf /etc/supervisord.d/
+#CMD ["supervisord", "-n"]
