@@ -23,8 +23,8 @@ fi
 # Valores padrão
 redis_port=6379
 redis_pass="@ScoobRedis-dg333445fvcv"
-redis_container="scoob-mysql"
-mysql_network="scoob-network"
+redis_container="scoob-redis"
+redis_network="scoob-network"
 init_conf="${path_dir}/redis.conf"
 
 # Parsing dos demais parâmetros
@@ -40,7 +40,7 @@ for arg in "$@"; do
       redis_container="${arg#*=}"
       ;;
     --network=*)
-      mysql_network="${arg#*=}"
+      redis_network="${arg#*=}"
       ;;
     --init-conf=*)
       init_conf="${arg#*=}"
@@ -106,7 +106,7 @@ EOF
 # Sobe o container Redis
 docker run -d --rm \
    --name ${$redis_container} \
-   -p ${mysql_port}:6379 \
+   -p ${redis_port}:6379 \
    --network "$redis_network" \
    --network-alias "${redis_container}-redis" \
    -v ${init_conf}:/usr/local/etc/redis/redis.conf \
