@@ -12,8 +12,6 @@ container="php-fpm-${4}-${port}"
 
 dir=scoob_implements/php/${4}
 
-chown -R $(id -u):$(id -g) $dir
-
 if [ -d $dir ]; then
   echo "Diretório scoob_implements ok!"
 else
@@ -45,6 +43,7 @@ cp -R ${path_dir}/progs/runs/php/${4}/supervisord $dir
 cp ${path_dir}/progs/runs/php/${4}/Dockerfile $dir
 cp ${path_dir}/progs/runs/php/${4}/commands.sh $dir
 
+chown -R $(id -u):$(id -g) $dir
 chmod -R 755 $dir
 
 # -----------------------------------------------------------
