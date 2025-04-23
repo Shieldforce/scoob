@@ -26,6 +26,7 @@ redis_pass="@ScoobRedis-dg333445fvcv"
 redis_container="scoob-redis"
 redis_network="scoob-network"
 init_conf="${path_dir}/redis.conf"
+init_conf="$(realpath "$init_conf")"
 
 # Parsing dos demais parâmetros
 for arg in "$@"; do

@@ -30,6 +30,7 @@ mysql_container="scoob-mysql"
 mysql_network="scoob-network"
 mysql_version="latest"
 init_sql_path="${path_dir}/ini.sql"
+init_sql_path="$(realpath "$init_sql_path")"
 
 # Parsing dos demais parâmetros
 for arg in "$@"; do
