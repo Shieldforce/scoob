@@ -7,9 +7,6 @@ ARG APP_DIR=/var/www
 
 WORKDIR $APP_DIR
 
-RUN usermod -u 9977 www-data && groupmod -g 9977 www-data
-USER www-data
-
 # Instala dependências do sistema
 RUN apt-get update && apt-get install -y --no-install-recommends \
     apt-utils gnupg2 curl ca-certificates lsb-release apt-transport-https \
