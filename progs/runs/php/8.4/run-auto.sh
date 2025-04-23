@@ -90,7 +90,7 @@ bash ${path_dir}/progs/exec_spinner.sh \
        --build-arg PATH_DIR=${dir} \
        --build-arg PATH_COR=$(pwd) \
        --build-arg VERSION=${4} \
-       -f "${dir}/Dockerfile" ." \
+       -f '${dir}/Dockerfile' ." \
     "Construindo container ${container}..."
 
 bash ${path_dir}/progs/exec_spinner.sh \
@@ -99,8 +99,8 @@ bash ${path_dir}/progs/exec_spinner.sh \
        --name ${container} \
        --restart unless-stopped \
        --network scoob-network \
-       --network-alias "${container}-nginx" \
-       -p "${port}:80" \
+       --network-alias '${container}-nginx' \
+       -p '${port}:80' \
        -v $(pwd):/var/www \
        ${container}" \
     "Rodando container ${container}..."
