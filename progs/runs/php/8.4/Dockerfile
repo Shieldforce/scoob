@@ -67,8 +67,8 @@ RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
     apt-get install -y nodejs && npm install -g yarn
 
 # Cria diretórios do nginx e aplica permissões
-RUN mkdir -p /var/log/nginx /etc/nginx/sites-available && \
-    chown -R www:www /var/log/nginx /etc/nginx/sites-available
+RUN mkdir -p /var/log/nginx /etc/nginx/sites-available /var/lib/nginx/body && \
+    chown -R www:www /var/log/nginx /etc/nginx/sites-available /var/lib/nginx
 
 # Copia configs
 COPY ${PATH_DIR}/php/php.ini /usr/local/etc/php/php.ini
