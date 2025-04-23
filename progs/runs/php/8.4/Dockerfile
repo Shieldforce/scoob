@@ -38,8 +38,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libxml2-dev \
     libssl-dev \
     supervisor \
-    nginx \
-    && rm -rf /var/lib/apt/lists/*
+    nginx
 
 # Adiciona o repositório da Microsoft
 RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - && \
