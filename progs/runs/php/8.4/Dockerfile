@@ -50,7 +50,7 @@ RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
 
 # Instala extensões PHP
 RUN docker-php-ext-install zip iconv simplexml pcntl gd fileinfo \
-    mysqli pdo pdo_mysql pdo_pgsql pgsql session xml intl bcmath
+    mysqli pdo pdo_mysql pdo_sqlsrv sqlsrv pdo_pgsql pgsql session xml intl bcmath
 
 # Arquivos de configuração
 COPY ${PATH_DIR}/supervisord/supervisord.conf /etc/supervisor
