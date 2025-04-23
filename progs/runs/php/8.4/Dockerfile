@@ -10,8 +10,10 @@ ARG APP_DIR=/var/www
 # Layer Workdir --------------------------------------------------
 WORKDIR $APP_DIR
 
-# Layer add Permissions dir
-RUN chmod 755 -R * && chown -R www-data: *
+# Ajusta permissões apenas para o diretório do app
+RUN mkdir -p /var/www && \
+    chown -R www-data:www-data /var/www && \
+    chmod -R 755 /var/www
 
 # Instala dependências base do sistema
 RUN apt-get update && apt-get install -y --no-install-recommends \
