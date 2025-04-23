@@ -90,7 +90,6 @@ scoob --type docker-laravel {parametros obrigatórios}
 scoob --docker-prune
 ```
 ---
-
 ### Roda um servidor mysql na rede scoob-network (se rodar: scoob --mysql-ext ele roda com os parâmetros defaults):
 ### Usuário root tem todos os privilégios! E utiliza a mesma senha --pass='password'
 #### Dados Default:
@@ -110,9 +109,23 @@ scoob --mysql-ext=true \
 ```
 ---
 
+---
+### Roda um servidor redis na rede scoob-network (se rodar: scoob --redis-ext ele roda com os parâmetros defaults):
+#### Dados Default:
+- port: 6379
+- pass: @ScoobRedis-dg333445fvcv
+- container: scoob-redis
+```
+scoob --redis-ext=true \
+    --container="scoob-redis" \
+    --port="6379" \
+    --pass="@ScoobRedis-dg333445fvcv"
+```
+---
+
 ## Exemplos de container para php/nginx e laravel:
 - --type                   (obrigatório) : Tipo do container para php sempre será (docker-php-nginx)
-- --version                (obrigatório) : Versão do PHP Versões disponíveis (7.3, 7.4, 8.1, 8.2, 8.3,84)
+- --version                (obrigatório) : Versão do PHP Versões disponíveis (7.3, 7.4, 8.1, 8.2, 8.3, 8.4)
 - --port                   (obrigatório) : Porta de Exposição do container
 - --redis-port             (opcional) : Seta porta do redis!
 - --mysql-port             (opcional) : Seta porta do mysql!
