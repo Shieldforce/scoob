@@ -181,7 +181,9 @@ Se não passou porta, ela será no caso de
 - php8.2: 3382
 - php8.3: 3383
 - php8.4: 3384
-  Se passou --mysql-port será o valor passado:
+  
+### Se passou --mysql-port será o valor passado:
+
 ```
 docker exec -it {container-name} mysql
 MariaDB [(none)]> create database {db_name};
