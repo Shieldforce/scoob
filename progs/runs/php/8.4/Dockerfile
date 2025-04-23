@@ -7,18 +7,18 @@ ARG PATH_COR
 ARG APP_DIR=/var/www
 ### Args ------------------------
 
-# Obter UID e GID do usuário local
-ARG HOST_UID
-ARG HOST_GID
-
-# Criar o grupo e o usuário www com o mesmo UID/GID do host
-RUN groupadd -g $HOST_GID www && useradd -u $HOST_UID -g www -m www
-
 # Layer Workdir --------------------------------------------------
 WORKDIR $APP_DIR
 
-# Ajustar permissões para o diretório de trabalho
-RUN chmod 755 -R * && chown -R www:www /var/www
+# Criação do grupo e usuário com UID e GID padrão
+ARG HOST_UID=1000
+ARG HOST_GID=1000
+
+RUN groupadd -g $HOST_GID www && \
+    useradd -u $HOST_UID -g www -m www
+
+# Layer add Permissions dir
+RUN chmod 755 -R * && chown -R www-data: *
 
 # Instala dependências base do sistema
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -81,7 +81,6 @@ COPY ${PATH_DIR}/nginx/sites /etc/nginx/sites-available
 # Layer Clear
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Expondo a porta configurada
 EXPOSE ${EXPOSE_PORT}
 
 # Configurações do Nginx e PHP-FPM
