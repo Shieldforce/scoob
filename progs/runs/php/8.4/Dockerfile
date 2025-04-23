@@ -7,11 +7,8 @@ ARG APP_DIR=/var/www
 
 WORKDIR $APP_DIR
 
-RUN useradd -u 9977 -m -s /bin/bash myappuser
-USER myappuser
-
-# Adiciona permissão padrão e muda ownership para www-data
 RUN usermod -u 9977 www-data && groupmod -g 9977 www-data
+USER www-data
 
 # Instala dependências do sistema
 RUN apt-get update && apt-get install -y --no-install-recommends \
