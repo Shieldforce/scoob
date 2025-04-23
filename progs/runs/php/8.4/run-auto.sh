@@ -85,12 +85,14 @@ fi
 
 bash ${path_dir}/progs/exec_spinner.sh \
     "docker build \
-       -t ${container} \
-       --build-arg EXPOSE_PORT=${port} \
-       --build-arg PATH_DIR=${dir} \
-       --build-arg PATH_COR=$(pwd) \
-       --build-arg VERSION=${4} \
-       -f '${dir}/Dockerfile' ." \
+        -t ${container} \
+        --build-arg EXPOSE_PORT=${port} \
+        --build-arg PATH_DIR=${dir} \
+        --build-arg PATH_COR=$(pwd) \
+        --build-arg VERSION=${4} \
+        --build-arg HOST_UID=$(id -u) \
+        --build-arg HOST_GID=$(id -g) \
+        -f '${dir}/Dockerfile' ." \
     "Construindo container ${container}..."
 
 bash ${path_dir}/progs/exec_spinner.sh \
@@ -102,6 +104,7 @@ bash ${path_dir}/progs/exec_spinner.sh \
        --network-alias '${container}-nginx' \
        -p '${port}:80' \
        -v $(pwd):/var/www \
+       --user $(id -u):$(id -g) \
        ${container}" \
     "Rodando container ${container}..."
 
