@@ -6,7 +6,7 @@
 #### Atualizações de Segurança:
 - Atualização de segurança para containers em produção, Agora os containers das versões docker-php-nginx
   nas versões de php (8.2, 8.3 e 8.4), não executam o container como root, mas como um usuário local, com privilégios limitados, 
-  para impedira escala de privilégios para o host.
+  que impedirá escala de privilégios para o host.
 
 ---
 #### Os containers habilitados para rodar em produção (rodam como usuário limitado):
