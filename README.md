@@ -213,14 +213,19 @@ DB_PASSWORD={senha_desejada}
 docker exec -it {container-name} php artisan migrate
 ```
 
-
 ### Rodar Horizon (Se não estiver instalado rode o primeiro comando):
 ```
 docker exec -it {container-name} composer require laravel/horizon
 docker exec -it {container-name} php artisan horizon:install
 ```
+---
 
-### Suportes para Sql Servers:
+### Versões do PHP com suportes para drivers sqlsrv(Sql server):
+- 8.2
+- 8.3
+- 8.4
+
+### Suporte como cliente para Sql Servers:
 SQL Server 2012 (SP4+)	✅ Suportado
 SQL Server 2014	✅ Suportado
 SQL Server 2016	✅ Suportado
