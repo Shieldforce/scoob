@@ -214,13 +214,13 @@ DB_PASSWORD={senha_desejada}
 
 ### Rodar Migrate (Se pedir para criar banco cujo o nome está na variável DB_DATABASE, aceite):
 ```
-docker exec -it {container-name} php artisan migrate
+docker exec -it --user $(id -u):$(id -g) {container-name} php artisan migrate
 ```
 
 ### Rodar Horizon (Se não estiver instalado rode o primeiro comando):
 ```
-docker exec -it {container-name} composer require laravel/horizon
-docker exec -it {container-name} php artisan horizon:install
+docker exec -it --user $(id -u):$(id -g) {container-name} composer require laravel/horizon
+docker exec -it --user $(id -u):$(id -g) {container-name} php artisan horizon:install
 ```
 ---
 
@@ -237,3 +237,9 @@ docker exec -it {container-name} php artisan horizon:install
 - SQL Server 2019	✅ Suportado
 - SQL Server 2022	✅ Suportado
 - SQL Azure (Azure SQL DB)	✅ Suportado
+
+
+### Entrar no container para rodar comandos sempre use o usuário local!
+```
+docker exec -it --user $(id -u):$(id -g) {container-name} bash
+```
