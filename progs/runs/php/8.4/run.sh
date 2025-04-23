@@ -85,6 +85,7 @@ if [[ "$continue" = "s" ]] || [[ "$continue" = "s" ]]; then
               --network scoob-network \
               -p "${port}:80" \
               -v $(pwd):/var/www \
+              --user 9977:9977 \
               ${container}
   if docker ps | grep "$container" &> /dev/null; then
     echo "";
