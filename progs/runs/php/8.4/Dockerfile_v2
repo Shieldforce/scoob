@@ -37,6 +37,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libpq-dev \
     libxml2-dev \
     libssl-dev \
+    supervisor \
     nginx
 
 # Adiciona repositório da Microsoft com suporte a chave GPG moderna
@@ -66,7 +67,9 @@ RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
     apt-get install -y nodejs && \
     npm install -g yarn
 
-# Copia configs do PHP e Nginx
+# Copia configs
+COPY ${PATH_DIR}/supervisord/supervisord.conf /etc/supervisor
+COPY ${PATH_DIR}/supervisord/conf /etc/supervisord.d/
 COPY ${PATH_DIR}/php/php.ini /usr/local/etc/php/php.ini
 COPY ${PATH_DIR}/nginx/nginx.conf /etc/nginx/nginx.conf
 COPY ${PATH_DIR}/nginx/sites /etc/nginx/sites-available
@@ -76,5 +79,7 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 EXPOSE ${EXPOSE_PORT}
 
-# Configurações do Nginx e PHP-FPM
-CMD service nginx start && php-fpm
+# finish dockerfile
+ADD ${PATH_DIR}/supervisord/supervisord.conf /etc/supervisor/supervisord.conf
+ADD ${PATH_DIR}/supervisord/conf /etc/supervisord.d/
+CMD ["supervisord", "-n"]
