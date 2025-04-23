@@ -3,6 +3,18 @@
 ## Requisitos obrigatórios:
 - Docker
 
+#### Atualizações de Segurança:
+- Atualização de segurança para containers em produção, Agora os containers das versões docker-php-nginx
+  nas versões de php (8.2, 8.3 e 8.4), não executam o container como root, mas como um usuário local, com privilégios limitados, 
+  para impedira escala de privilégios para o host.
+
+#### Os containers habilitados para rodar em produção (rodam como usuário limitado), 
+#### os outros containers podem rodar em produção, 
+#### mas são executados como root, se pode ser considerado uma falha de segurança:
+- scoob --type docker-php-nginx --version 8.2 --port {port}
+- scoob --type docker-php-nginx --version 8.3 --port {port}
+- scoob --type docker-php-nginx --version 8.4 --port {port}
+
 ---
 ## Instalando Scoob globalmente:
 ```

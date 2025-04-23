@@ -72,23 +72,20 @@ fi
 if [[ "$continue" = "s" ]] || [[ "$continue" = "s" ]]; then
   bash ${path_dir}/progs/docker-remove.sh --docker-remove ${container}
   docker build \
-          -t ${container} \
-          --build-arg EXPOSE_PORT=${port} \
-          --build-arg PATH_DIR=${dir} \
-          --build-arg PATH_COR=$(pwd) \
-          --build-arg VERSION=${4} \
-          --build-arg HOST_UID=$(id -u) \
-          --build-arg HOST_GID=$(id -g) \
-          -f "${dir}/Dockerfile" .
-      docker run \
-          -d \
-          --name ${container} \
-          --restart unless-stopped \
-          --network scoob-network \
-          -p "${port}:80" \
-          -v $(pwd):/var/www \
-          --user $(id -u):$(id -g) \
-          ${container}
+              -t ${container} \
+              --build-arg EXPOSE_PORT=${port} \
+              --build-arg PATH_DIR=${dir} \
+              --build-arg PATH_COR=$(pwd) \
+              --build-arg VERSION=${4} \
+              -f "${dir}/Dockerfile" .
+  docker run \
+              -d \
+              --name ${container} \
+              --restart unless-stopped \
+              --network scoob-network \
+              -p "${port}:80" \
+              -v $(pwd):/var/www \
+              ${container}
   if docker ps | grep "$container" &> /dev/null; then
     echo "";
     echo -e "\e[33;32m Container criado com sucesso! \e[0m";
