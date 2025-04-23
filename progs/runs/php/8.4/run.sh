@@ -77,6 +77,8 @@ if [[ "$continue" = "s" ]] || [[ "$continue" = "s" ]]; then
               --build-arg PATH_DIR=${dir} \
               --build-arg PATH_COR=$(pwd) \
               --build-arg VERSION=${4} \
+              --build-arg HOST_UID=$(id -u) \
+              --build-arg HOST_GID=$(id -g) \
               -f "${dir}/Dockerfile" .
   docker run \
               -d \

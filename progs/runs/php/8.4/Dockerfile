@@ -83,5 +83,7 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 EXPOSE ${EXPOSE_PORT}
 
+USER www
+
 # Configurações do Nginx e PHP-FPM
 CMD service nginx start && php-fpm
