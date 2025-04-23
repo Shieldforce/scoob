@@ -10,7 +10,7 @@
 
 ---
 #### Os containers habilitados para rodar em produção (rodam como usuário limitado):
-- 
+
 - scoob --type docker-php-nginx --version 8.2 --port {port}
 - scoob --type docker-php-nginx --version 8.3 --port {port}
 - scoob --type docker-php-nginx --version 8.4 --port {port}
