@@ -57,11 +57,17 @@ for ARG in "$@"; do
   fi
 
   # Scoob mysql
-    if [[ "$ARG" == *--mysql-ext* ]]; then
-      echo "";
-      bash $path_dir/progs/scoob-mysql.sh "$@"
-      echo "";
-    fi
+  if [[ "$ARG" == *--mysql-ext* ]]; then
+    echo "";
+    bash $path_dir/progs/scoob-mysql.sh "$@"
+    echo "";
+  fi
+  # Scoob mysql
+  if [[ "$ARG" == *--redis-ext* ]]; then
+    echo "";
+    bash $path_dir/progs/scoob-redis.sh "$@"
+    echo "";
+  fi
 done
 
 
