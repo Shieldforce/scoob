@@ -20,6 +20,7 @@ RUN chmod 755 -R * && chown -R www-data: *
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
     apt-utils \
+    gnupg2 \
     supervisor \
     unixodbc-dev \
     libodbc1 \
