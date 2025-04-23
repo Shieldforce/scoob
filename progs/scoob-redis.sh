@@ -105,9 +105,9 @@ EOF
 
 # Sobe o container Redis
 docker run -d --rm \
-   --name ${$redis_container} \
+   --name ${redis_container} \
    -p ${redis_port}:6379 \
-   --network "$redis_network" \
+   --network "${redis_network}" \
    --network-alias "${redis_container}-redis" \
    -v ${init_conf}:/usr/local/etc/redis/redis.conf \
    redis \
