@@ -96,7 +96,7 @@ logfile ""
 loglevel notice
 
 # Senha para autenticação (opcional, mas recomendado em produção)
-requirepass '${pass}'
+requirepass '${redis_pass}'
 
 # Permitir acesso via sockets Unix (opcional)
 # unixsocket /tmp/redis.sock
