@@ -157,7 +157,9 @@ Se não passou porta, ela será no caso de
 - php8.2: 6382
 - php8.3: 6383
 - php8.4: 6384
-Se passou --redis-port será o valor passado:
+
+### Se passou --redis-port será o valor passado:
+
 ```
 docker exec -it {container-name} redis-cli -p {port}
 ```
