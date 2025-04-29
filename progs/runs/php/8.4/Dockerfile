@@ -40,8 +40,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libpq-dev \
     libxml2-dev \
     libssl-dev \
-    nginx \
-    && pecl install redis
+    nginx
 
 # Repositório Microsoft + msodbcsql17
 RUN curl -sSL https://packages.microsoft.com/keys/microsoft.asc -o /etc/apt/keyrings/microsoft.asc && \
