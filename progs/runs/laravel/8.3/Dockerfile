@@ -31,6 +31,7 @@ RUN apt-get update && \
     libpng-dev \
     libpq-dev \
     libxml2-dev \
+    libssl-dev \
     nginx \
     redis-server \
     mariadb-server \
@@ -62,7 +63,7 @@ RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
     npm install -g yarn
 
 RUN docker-php-ext-install zip simplexml pcntl gd fileinfo \
-    mysqli pdo pdo_mysql pdo_pgsql pgsql session xml intl bcmath
+    mysqli pdo pdo_mysql pdo_pgsql pgsql session xml intl bcmath openssl
 
 RUN pecl install redis \
     && docker-php-ext-enable redis
