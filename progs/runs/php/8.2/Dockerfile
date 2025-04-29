@@ -57,7 +57,7 @@ RUN pecl install pdo_sqlsrv sqlsrv && \
 
 # Extensões PHP
 RUN docker-php-ext-install zip iconv simplexml pcntl gd fileinfo \
-    mysqli pdo pdo_mysql pdo_pgsql pgsql session xml intl bcmath openssl
+    mysqli pdo pdo_mysql pdo_pgsql pgsql session xml intl bcmath
 
 # Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer

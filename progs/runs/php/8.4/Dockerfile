@@ -57,7 +57,10 @@ RUN pecl install pdo_sqlsrv sqlsrv && \
 
 # Extensões PHP
 RUN docker-php-ext-install zip iconv simplexml pcntl gd fileinfo \
-    mysqli pdo pdo_mysql pdo_pgsql pgsql session xml intl bcmath openssl
+    mysqli pdo pdo_mysql pdo_pgsql pgsql session xml intl bcmath
+
+# Instala o Redis via PECL
+RUN pecl install redis && docker-php-ext-enable redis
 
 # Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
