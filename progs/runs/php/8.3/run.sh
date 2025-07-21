@@ -37,6 +37,8 @@ else
   fi
 fi
 
+echo "$container" > scoob_implements/container.txt
+
 cp -R ${path_dir}/progs/runs/php/${4}/nginx $dir
 cp -R ${path_dir}/progs/runs/php/${4}/php $dir
 cp -R ${path_dir}/progs/runs/php/${4}/supervisord $dir
