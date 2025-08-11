@@ -15,6 +15,11 @@
 - scoob --type docker-php-nginx --version 8.3 --port {port}
 - scoob --type docker-php-nginx --version 8.4 --port {port}
 
+#### Caso seu container não subir por algum motivo, tente rodar com sudo:
+```
+sudo ~/scoob/scoob --type docker-php-nginx --version 8.2 --port {port}
+```
+
 ---
 ## Instalando Scoob globalmente:
 ```
