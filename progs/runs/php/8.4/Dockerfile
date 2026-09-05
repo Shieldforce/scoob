@@ -45,6 +45,7 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-ins
     libssl-dev \
     libicu-dev \
     libmagickwand-dev \
+    libgmp-dev \
     nginx && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
@@ -63,7 +64,7 @@ RUN pecl install pdo_sqlsrv sqlsrv && \
 
 # ----------------- Extensões PHP comuns -----------------
 RUN docker-php-ext-install zip iconv simplexml pcntl gd fileinfo \
-    mysqli pdo pdo_mysql pdo_pgsql pgsql session xml intl bcmath
+    mysqli pdo pdo_mysql pdo_pgsql pgsql session xml intl bcmath gmp
 
 # ----------------- Imagick (necessário p/ QrCode::format('png')) -----------------
 RUN pecl install imagick && docker-php-ext-enable imagick
