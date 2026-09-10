@@ -74,6 +74,7 @@ RUN pecl install redis \
 COPY ${PATH_DIR}/supervisord/supervisord.conf /etc/supervisor
 COPY ${PATH_DIR}/supervisord/conf /etc/supervisord.d/
 COPY ${PATH_DIR}/php/php.ini /usr/local/etc/php/php.ini
+COPY ${PATH_DIR}/php/www.conf /usr/local/etc/php-fpm.d/www.conf
 COPY ${PATH_DIR}/nginx/nginx.conf /etc/nginx/nginx.conf
 COPY ${PATH_DIR}/nginx/sites /etc/nginx/sites-available
 COPY ${PATH_DIR}/redis/redis.conf /etc/redis/redis.conf
