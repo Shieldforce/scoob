@@ -69,6 +69,17 @@ RUN docker-php-ext-install zip iconv simplexml pcntl gd fileinfo \
 # ----------------- Imagick (necessário p/ QrCode::format('png')) -----------------
 RUN pecl install imagick && docker-php-ext-enable imagick
 
+# ----------------- Mídia: vídeo e arquivos compactados -----------------
+# A IA que analisa documento (Jarvis, no federal-zap) lê imagem e PDF, mas
+# não abre vídeo nem pacote. O ffmpeg tira quadros do vídeo da vistoria, e
+# unar/7z abrem o .rar que o associado manda quando junta tudo numa pasta
+# (.zip o próprio PHP já abre, via ZipArchive).
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+    ffmpeg \
+    p7zip-full \
+    unar && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
 # ----------------- Redis -----------------
 RUN pecl install redis && docker-php-ext-enable redis
 

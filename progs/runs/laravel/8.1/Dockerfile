@@ -37,6 +37,17 @@ RUN apt-get update && \
 
 RUN apt-get update && apt-get upgrade -y
 
+# ----------------- Mídia: vídeo e arquivos compactados -----------------
+# A IA que analisa documento (Jarvis, no federal-zap) lê imagem e PDF, mas
+# não abre vídeo nem pacote. O ffmpeg tira quadros do vídeo da vistoria, e
+# unar/7z abrem o .rar que o associado manda quando junta tudo numa pasta
+# (.zip o próprio PHP já abre, via ZipArchive).
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+    ffmpeg \
+    p7zip-full \
+    unar && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Install Node.js (LTS) e Yarn
