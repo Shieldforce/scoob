@@ -46,6 +46,7 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-ins
     libicu-dev \
     libmagickwand-dev \
     libgmp-dev \
+    libcap2-bin \
     nginx && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
@@ -87,16 +88,21 @@ RUN pecl install redis && docker-php-ext-enable redis
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # ----------------- Node.js + Yarn -----------------
-RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
+RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - && \
     apt-get install -y nodejs && npm install -g yarn && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # ----------------- Diretórios Nginx -----------------
-RUN mkdir -p /var/log/nginx /etc/nginx/sites-available /var/lib/nginx/body /run && \
-    chown -R www:www /var/log/nginx /etc/nginx/sites-available /var/lib/nginx /run
+RUN mkdir -p /var/log/nginx /var/log/php /etc/nginx/sites-available /var/lib/nginx/body /run && \
+    chown -R www:www /var/log/nginx /var/log/php /etc/nginx/sites-available /var/lib/nginx /run
+
+# O container roda como "www" (sem root), e usuário comum não abre porta abaixo de 1024:
+# sem isso o nginx não sobe na 80 e o container fica reiniciando em loop.
+RUN setcap 'cap_net_bind_service=+ep' /usr/sbin/nginx
 
 # ----------------- Configurações custom -----------------
 COPY ${PATH_DIR}/php/php.ini /usr/local/etc/php/php.ini
+COPY ${PATH_DIR}/php/www.conf /usr/local/etc/php-fpm.d/www.conf
 COPY ${PATH_DIR}/nginx/nginx.conf /etc/nginx/nginx.conf
 COPY ${PATH_DIR}/nginx/sites /etc/nginx/sites-available
 
