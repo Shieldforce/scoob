@@ -103,6 +103,8 @@ RUN setcap 'cap_net_bind_service=+ep' /usr/sbin/nginx
 # ----------------- Configurações custom -----------------
 COPY ${PATH_DIR}/php/php.ini /usr/local/etc/php/php.ini
 COPY ${PATH_DIR}/php/www.conf /usr/local/etc/php-fpm.d/www.conf
+COPY ${PATH_DIR}/php/opcache.ini /usr/local/etc/php/conf.d/zz-opcache.ini
+ENV PHP_OPCACHE_VALIDATE_TIMESTAMPS=0
 COPY ${PATH_DIR}/nginx/nginx.conf /etc/nginx/nginx.conf
 COPY ${PATH_DIR}/nginx/sites /etc/nginx/sites-available
 

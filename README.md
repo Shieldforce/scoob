@@ -142,6 +142,12 @@ Com Reverb (o nginx do host faz proxy do WebSocket pra `127.0.0.1:8080`, sem dep
 scoob --type docker-php-nginx --version 8.4 --port 8013 --reverb-port 8080
 ```
 
+#### Desempenho (php 8.4)
+A imagem já sai ajustada pra produção: PHP-FPM com `pm.max_children=30` (`php/www.conf`) e opcache com 256MB /
+65 mil arquivos sem checar alteração em disco (`php/opcache.ini`). Com isso, código novo só entra depois de
+`docker restart <container>`. Em desenvolvimento, pra ver alteração sem reiniciar, suba o container com
+`-e PHP_OPCACHE_VALIDATE_TIMESTAMPS=1`.
+
 Este comando vai instalar um container com php/nginx.
 ```
 scoob --type docker-php-nginx --version 8.4 --port 8084
