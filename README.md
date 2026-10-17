@@ -134,7 +134,13 @@ scoob --redis-ext=true \
 - --port                   (obrigatório) : Porta de Exposição do container
 - --redis-port             (opcional) : Seta porta do redis!
 - --mysql-port             (opcional) : Seta porta do mysql!
+- --reverb-port            (opcional, só php 8.4) : Publica a porta do Reverb em 127.0.0.1 do host
 ---
+
+Com Reverb (o nginx do host faz proxy do WebSocket pra `127.0.0.1:8080`, sem depender do IP do container):
+```
+scoob --type docker-php-nginx --version 8.4 --port 8013 --reverb-port 8080
+```
 
 Este comando vai instalar um container com php/nginx.
 ```

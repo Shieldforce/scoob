@@ -8,6 +8,14 @@ fi
 
 container="php-fpm-${4}-${port}"
 
+# Porta do Reverb publicada só no loopback do host (nginx do host faz o proxy
+# do WebSocket pra 127.0.0.1:<porta>). Sem isso o nginx precisa apontar pro IP
+# do container na scoob-network, que muda quando o Docker reinicia.
+reverb_publish=""
+if [ -n "$8" ] && [[ "$7" == "--reverb-port" ]]; then
+  reverb_publish="-p 127.0.0.1:${8}:${8}"
+fi
+
 # Cores
 GREEN='\033[0;32m'
 RED='\033[0;31m'
@@ -103,6 +111,7 @@ bash ${path_dir}/progs/exec_spinner.sh \
        --network scoob-network \
        --network-alias '${container}-nginx' \
        -p '${port}:80' \
+       ${reverb_publish} \
        -v $(pwd):/var/www \
        --user $(id -u):$(id -g) \
        ${container}" \

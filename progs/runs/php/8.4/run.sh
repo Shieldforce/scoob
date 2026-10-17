@@ -8,6 +8,14 @@ fi
 
 container="php-fpm-${4}-${port}"
 
+# Porta do Reverb publicada só no loopback do host (nginx do host faz o proxy
+# do WebSocket pra 127.0.0.1:<porta>). Sem isso o nginx precisa apontar pro IP
+# do container na scoob-network, que muda quando o Docker reinicia.
+reverb_publish=""
+if [ -n "$8" ] && [[ "$7" == "--reverb-port" ]]; then
+  reverb_publish="-p 127.0.0.1:${8}:${8}"
+fi
+
 # -----------------------------------------------------------
 
 dir=scoob_implements/php/${4}
@@ -66,13 +74,12 @@ else
   echo "Rede scoob-network já existe."
 fi
 
-# verifica de o container existe e remove
-if docker ps -a --format '{{.Names}}' | grep -wq "${container}"; then
-  echo "Removendo container existente..."
-  docker rm -f ${container}
-fi
-
-if [[ "$continue" = "s" ]] || [[ "$continue" = "s" ]]; then
+if [[ "$continue" == [sS] ]]; then
+  # só remove o container existente depois da confirmação
+  if docker ps -a --format '{{.Names}}' | grep -wq "${container}"; then
+    echo "Removendo container existente..."
+    docker rm -f ${container}
+  fi
   bash ${path_dir}/progs/docker-remove.sh --docker-remove ${container}
   docker build \
       -t ${container} \
@@ -89,6 +96,7 @@ if [[ "$continue" = "s" ]] || [[ "$continue" = "s" ]]; then
       --restart unless-stopped \
       --network scoob-network \
       -p "${port}:80" \
+      ${reverb_publish} \
       -v $(pwd):/var/www \
       --user $(id -u):$(id -g) \
       ${container}
