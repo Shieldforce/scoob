@@ -90,6 +90,20 @@ scoob --type docker-php-nginx {parametros obrigatórios}
 scoob --type docker-laravel {parametros obrigatórios}
 ```
 
+### Implementar um container Node (aplicação Node, ex.: Express + Vue):
+```
+scoob --type docker-node --version 22 --port 8020
+```
+- --version (obrigatório) : Versão do Node (20, 22, 24)
+- --port    (obrigatório) : Porta no host. Fica só em 127.0.0.1 (o nginx do host faz o proxy pra ela)
+- Container: `node-{versão}-{porta}` (ex.: `node-22-8020`), rede scoob-network, `--restart unless-stopped`
+- A pasta do projeto é montada em `/var/www`; a aplicação deve escutar a variável `PORT` (3000 dentro do container)
+- Roda como o usuário do host (arquivos criados ficam com o dono certo)
+- Primeira subida sem `node_modules`: roda `npm ci` (ou `npm install`) e `npm run build` (se existir)
+- Depois sempre sobe com `npm run start`; pra atualizar código: `git pull`, `docker exec node-22-8020 npm ci`,
+  `docker exec node-22-8020 npm run build` e `docker restart node-22-8020`
+- Não mexe nos tipos PHP/Laravel: arquivos próprios em `progs/runs/node/`
+
 ### Limpar tudo que não está sendo usado no docker (CUIDADO, IRÁ EXCLUIR TUDO QUE NÃO ESTÁ SENDO USADO!):
 ```
 scoob --docker-prune

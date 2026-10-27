@@ -1,6 +1,6 @@
 #!/bin/bash
 
-types=("docker-php-nginx" "docker-laravel" "docker-remove")
+types=("docker-php-nginx" "docker-laravel" "docker-node" "docker-remove")
 versions=("7.4","8.1","8.2","8.3","8.4")
 
 if [ -v $2 ]; then
@@ -46,6 +46,14 @@ else
         echo "disponíveis são: $(printf '%s, ' "${versions[@]}") "
         exit
       fi
+    fi
+  elif [[ "$2" = "docker-node" ]]; then
+    if [[ "$4" = "20" ]] || [[ "$4" = "22" ]] || [[ "$4" = "24" ]]; then
+      bash ${path_dir}/progs/runs/node/run.sh "$@"
+    else
+      echo "Você precisa passar --version com a versão do Node, as versões "
+      echo "disponíveis são: 20, 22, 24 "
+      exit
     fi
   elif [[ "$2" = "docker-remove" ]]; then
     bash ${path_dir}/progs/docker-remove.sh "$@"
